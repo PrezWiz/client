@@ -1,12 +1,5 @@
 import { ContentSection, HeroHeader } from '@/types/landing';
 
-/* ====================
-[> CUSTOMIZING CONTENT <]
--- Setup image by typing `/image-name.file` (Example: `/header-image.jpg`)
--- Add images by adding files to /public folder
--- Leave blank `` if you don't want to put texts or images
- ==================== */
-
 export const heroHeader: HeroHeader = {
   header: `손쉬운 프레젠테이션 제작 도구`,
   subheader: `간단한 키워드 입력으로 빠르게 프레젠테이션을 만들어 보세요.`,

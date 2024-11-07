@@ -1,12 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import { useAuth } from '@/components/auth/auth-context';
 import { siteConfig } from '@/config/metadata';
 import { navLinks } from '@/config/nav-links';
+import { useIsLoggedInAtomValue } from '@/stores/auth';
 
 const Footer = () => {
-  const { loggedIn } = useAuth();
+  const isLoggedIn = useIsLoggedInAtomValue();
 
   return (
     <footer className="mt-auto">
@@ -15,7 +15,7 @@ const Footer = () => {
           <Link href="/">
             <h1 className="mb-2 text-2xl font-bold sm:mb-0">{siteConfig.name}</h1>
           </Link>
-          {loggedIn && (
+          {isLoggedIn && (
             <ul className="mb-6 flex flex-wrap items-center text-primary opacity-60 sm:mb-0">
               {navLinks.map(link => (
                 <li key={link.route}>

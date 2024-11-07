@@ -3,18 +3,18 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useAuth } from '@/components/auth/auth-context';
 import LoginDialog from '@/components/auth/LoginDialog';
 import MemberMenu from '@/components/auth/MemberMenu';
 import RegisterDialog from '@/components/auth/RegisterDialog';
 import { siteConfig } from '@/config/metadata';
 import { navLinks } from '@/config/nav-links';
 import { settings } from '@/config/settings';
+import { useIsLoggedInAtomValue } from '@/stores/auth';
 import ModeToggle from './ModeToggle';
 
 const Navbar = () => {
   const [navbar, setNavbar] = useState(false);
-  const { loggedIn } = useAuth();
+  const isLoggedIn = useIsLoggedInAtomValue();
 
   const handleClick = async () => {
     setNavbar(false);
@@ -38,13 +38,7 @@ const Navbar = () => {
               className="flex flex-row items-center gap-2 text-primary duration-200 lg:hover:scale-[1.10]"
               onClick={handleClick}
             >
-              <Image
-                src="/logo.svg"
-                className="dark:brightness-0 dark:invert-[1]"
-                alt="Resumate Logo"
-                width={40}
-                height={40}
-              />
+              <Image src="/logo.svg" className="dark:brightness-0 dark:invert-[1]" alt="Logo" width={40} height={40} />
               <h1 className="text-2xl font-bold">{siteConfig.name}</h1>
             </Link>
             {/**
@@ -85,7 +79,7 @@ const Navbar = () => {
         </div>
         <div>
           {/* 모바일: 햄버거 메뉴 클릭 시 메뉴 표시 */}
-          {loggedIn && (
+          {isLoggedIn && (
             <div
               style={{ width: '100%', maxWidth: '20rem' }}
               className={`absolute left-0 right-0 z-10 m-auto justify-self-center rounded-md border bg-background p-4 md:static md:mt-0 md:block md:border-none md:p-0 ${navbar ? 'block' : 'hidden'}`}
@@ -105,8 +99,9 @@ const Navbar = () => {
         </div>
         {settings.themeToggleEnabled && (
           <div className="mt-6 flex justify-center space-x-4 md:mt-0">
-            {loggedIn && <MemberMenu />}
-            {!loggedIn && (
+            {isLoggedIn ? (
+              <MemberMenu />
+            ) : (
               <>
                 <LoginDialog />
                 <RegisterDialog />

@@ -33,7 +33,7 @@ const icons = {
   featcard1: () => {
     return (
       <Image
-        src="featcard1.svg"
+        src="/featcard1.svg"
         className="dark:brightness-0 dark:invert-[1]"
         width={100}
         height={100}
@@ -44,7 +44,7 @@ const icons = {
   featcard2: () => {
     return (
       <Image
-        src="featcard2.svg"
+        src="/featcard2.svg"
         className="dark:brightness-0 dark:invert-[1]"
         width={100}
         height={100}
@@ -55,7 +55,7 @@ const icons = {
   featcard3: () => {
     return (
       <Image
-        src="featcard3.svg"
+        src="/featcard3.svg"
         className="dark:brightness-0 dark:invert-[1]"
         width={100}
         height={100}

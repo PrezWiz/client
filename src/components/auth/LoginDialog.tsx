@@ -5,20 +5,24 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useSetIsLoggedInAtom } from '@/stores/auth';
 
 type env = string | undefined;
 
 const LoginDialog = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const REST_API_KEY: env = process.env.NEXT_PUBLIC_REST_API_KEY;
-  const REDIRECT_URI: env = process.env.NEXT_PUBLIC_REDIRECT_URI;
+  const setIsLoggedIn = useSetIsLoggedInAtom();
+  const REST_API_KEY: env = process.env.KAKAO_AUTH_API_KEY;
+  const REDIRECT_URI: env = process.env.NEXT_PUBLIC_KAKAO_AUTH_REDIRECT_URL;
   const LOGIN_LINK: env = `
   https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API_KEY}
   &redirect_uri=${REDIRECT_URI}
   `;
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     fetch('/api/login', {
       method: 'POST',
       headers: {
@@ -29,12 +33,13 @@ const LoginDialog = () => {
       .then(res => res.json())
       .then(data => {
         if (data.status === 'success') {
-          window.location.reload();
+          setIsLoggedIn(true);
         } else {
           alert(data.message);
         }
       });
   };
+
   return (
     <Dialog>
       <DialogTrigger asChild>

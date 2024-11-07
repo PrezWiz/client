@@ -1,5 +1,7 @@
+'use client';
+
+import { redirect } from 'next/navigation';
 import { FiKey, FiLogOut, FiUser, FiXCircle } from 'react-icons/fi';
-import { useAuth } from '@/components/auth/auth-context';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -9,9 +11,18 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { deleteSession } from '@/lib/auth/session';
+import { useSetIsLoggedInAtom } from '@/stores/auth';
 
 const MemberMenu = () => {
-  const { logout } = useAuth();
+  const setIsLoggedIn = useSetIsLoggedInAtom();
+
+  const logout = async () => {
+    await deleteSession();
+    setIsLoggedIn(false);
+    redirect('/');
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
