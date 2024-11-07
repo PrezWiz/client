@@ -1,10 +1,8 @@
 import { Noto_Sans_KR } from 'next/font/google';
-import { AuthProvider } from '@/components/auth/auth-context';
 import Footer from '@/components/layout/Footer';
 import Navbar from '@/components/layout/Navbar';
-import ThemeProvider from '@/components/ThemeProvider';
 import { siteConfig } from '@/config/metadata';
-import { settings } from '@/config/settings';
+import { Providers } from '@/contexts';
 import './globals.css';
 
 const noto_sans_kr = Noto_Sans_KR({
@@ -67,18 +65,14 @@ interface RootLayoutProps {
 }
 
 const RootLayout = ({ children }: RootLayoutProps) => {
-  const defaultTheme = settings.themeToggleEnabled ? 'system' : 'light';
-
   return (
-    <html lang="ko">
+    <html suppressHydrationWarning lang="ko">
       <body className={`${noto_sans_kr.className} flex min-h-screen flex-col bg-background text-primary`}>
-        <ThemeProvider enableSystem attribute="class" defaultTheme={defaultTheme}>
-          <AuthProvider>
-            <Navbar />
-            {children}
-            <Footer />
-          </AuthProvider>
-        </ThemeProvider>
+        <Providers>
+          <Navbar />
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
