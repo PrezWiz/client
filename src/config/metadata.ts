@@ -5,7 +5,7 @@ import { SiteConfig } from '@/types';
 -- Fill the details about your website
  ==================== */
 
-export const baseUrl = process.env.BACKEND_API_URL || '';
+export const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || '';
 
 export const siteConfig: SiteConfig = {
   name: 'PrezWiz',
