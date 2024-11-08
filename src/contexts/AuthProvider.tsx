@@ -1,6 +1,6 @@
 'use server';
 
-import { verifySession } from '@/lib/auth/session';
+import { verifySession } from '@/libs/auth/session';
 import UserProvider from './UserProvider';
 
 const AuthProvider = async ({ children }: { children: React.ReactNode }) => {

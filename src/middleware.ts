@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { BASE_URL, PUBLIC_ROUTES } from '@/constants/routes';
-import { verifyToken } from '@/lib/auth/jwt';
-import { getSession } from '@/lib/auth/session';
+import { verifyToken } from '@/libs/auth/jwt';
+import { getSession } from '@/libs/auth/session';
 
 export const middleware = async (request: NextRequest) => {
   const { pathname } = request.nextUrl;

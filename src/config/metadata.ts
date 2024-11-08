@@ -1,10 +1,5 @@
 import { SiteConfig } from '@/types';
 
-/* ====================
-[> WEBSITE CONFIG <]
--- Fill the details about your website
- ==================== */
-
 export const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || '';
 
 export const siteConfig: SiteConfig = {

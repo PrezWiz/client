@@ -11,7 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { deleteSession } from '@/lib/auth/session';
+import { deleteSession } from '@/libs/auth/session';
 import { useSetIsLoggedInAtom } from '@/stores/auth';
 
 const MemberMenu = () => {
