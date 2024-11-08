@@ -17,8 +17,8 @@ import { useSetIsLoggedInAtom } from '@/stores/auth';
 const MemberMenu = () => {
   const setIsLoggedIn = useSetIsLoggedInAtom();
 
-  const logout = async () => {
-    await deleteSession();
+  const logout = () => {
+    deleteSession();
     setIsLoggedIn(false);
     redirect('/');
   };

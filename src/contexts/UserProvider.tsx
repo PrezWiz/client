@@ -1,30 +1,14 @@
 'use client';
 
-import { useEffect } from 'react';
-import { verifySession } from '@/lib/auth/session';
-import { useSetIsLoggedInAtom } from '@/stores/auth';
+import { useHydrateAtoms } from 'jotai/utils';
+import { isLoggedInAtom } from '@/stores/auth';
+import { SessionType, userAtom } from '@/stores/user';
 
-const UserProvider = ({ children }: { children: React.ReactNode }) => {
-  const setIsLoggedIn = useSetIsLoggedInAtom();
-
-  useEffect(() => {
-    const setUser = async () => {
-      const session = await verifySession();
-      console.log('@@', session);
-
-      if (session) {
-        setIsLoggedIn(true);
-        return;
-      }
-
-      setIsLoggedIn(false);
-    };
-
-    setUser();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+const UserProvider = ({ children, session }: { children: React.ReactNode; session: SessionType | undefined }) => {
+  useHydrateAtoms([[isLoggedInAtom, session ? true : false]]);
+  useHydrateAtoms([[userAtom, session]]);
 
   return <>{children}</>;
 };
 
-export { UserProvider };
+export default UserProvider;

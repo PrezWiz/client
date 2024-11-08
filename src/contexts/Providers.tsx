@@ -1,16 +1,14 @@
-'use client';
-
 import { Provider as JotaiProvider } from 'jotai';
+import { AuthProvider } from './AuthProvider';
 import { QueryClientProvider } from './QueryClientProvider';
 import { ThemeProvider } from './ThemeProvider';
-import { UserProvider } from './UserProvider';
 
 const Providers = ({ children }: React.PropsWithChildren) => {
   return (
     <ThemeProvider>
       <JotaiProvider>
         <QueryClientProvider>
-          <UserProvider>{children}</UserProvider>
+          <AuthProvider>{children}</AuthProvider>
         </QueryClientProvider>
       </JotaiProvider>
     </ThemeProvider>

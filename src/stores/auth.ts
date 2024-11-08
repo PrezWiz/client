@@ -1,7 +1,7 @@
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { atomWithReset } from 'jotai/utils';
 
-const isLoggedInAtom = atomWithReset<boolean>(false);
+export const isLoggedInAtom = atomWithReset<boolean | null>(null);
 
 export const useIsLoggedInAtom = () => useAtom(isLoggedInAtom);
 

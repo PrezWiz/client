@@ -9,7 +9,7 @@ export type SessionType = {
   exp: number;
 };
 
-const userAtom = atomWithReset<SessionType | undefined>(undefined);
+export const userAtom = atomWithReset<SessionType | undefined>(undefined);
 
 export const useUserAtomValue = () => useAtomValue(userAtom);
 
