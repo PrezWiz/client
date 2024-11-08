@@ -1,10 +1,12 @@
 'use client';
 
 import { useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { mutations } from '@/queries';
 import { useSetIsLoggedInAtom } from '@/stores/auth';
 
 type env = string | undefined;
@@ -20,24 +22,20 @@ const LoginDialog = () => {
   &redirect_uri=${REDIRECT_URI}
   `;
 
+  const { mutateAsync } = useMutation({
+    ...mutations.auth.login,
+    onSuccess: () => {
+      setIsLoggedIn(true);
+    },
+    onError: error => {
+      alert(error.message);
+    },
+  });
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    fetch('/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password }),
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.status === 'success') {
-          setIsLoggedIn(true);
-        } else {
-          alert(data.message);
-        }
-      });
+    await mutateAsync({ email, password });
   };
 
   return (
