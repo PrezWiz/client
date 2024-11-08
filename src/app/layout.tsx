@@ -1,3 +1,4 @@
+import { Toaster } from 'react-hot-toast';
 import { Noto_Sans_KR } from 'next/font/google';
 import Footer from '@/components/layout/Footer';
 import Navbar from '@/components/layout/Navbar';
@@ -73,6 +74,7 @@ const RootLayout = ({ children }: RootLayoutProps) => {
           {children}
           <Footer />
         </Providers>
+        <Toaster />
       </body>
     </html>
   );
