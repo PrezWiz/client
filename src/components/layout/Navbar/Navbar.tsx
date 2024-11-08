@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import LoginDialog from '@/components/auth/LoginDialog';
+import { LoginDialog } from '@/components/auth/login';
 import MemberMenu from '@/components/auth/MemberMenu';
 import RegisterDialog from '@/components/auth/RegisterDialog';
 import { siteConfig } from '@/config/metadata';
