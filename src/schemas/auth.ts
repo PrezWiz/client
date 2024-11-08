@@ -19,7 +19,7 @@ export const loginSchema = z.object({
     }),
 });
 
-export const signUpSchema = z.object({
+export const registerSchema = z.object({
   email: z.string().email({ message: '이메일 형식이 올바르지 않아요' }),
   password: z
     .string()

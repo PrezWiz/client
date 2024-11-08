@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { LoginDialog } from '@/components/auth/login';
 import MemberMenu from '@/components/auth/MemberMenu';
-import RegisterDialog from '@/components/auth/RegisterDialog';
+import { RegisterDialog } from '@/components/auth/register';
 import { siteConfig } from '@/config/metadata';
 import { navLinks } from '@/config/nav-links';
 import { settings } from '@/config/settings';
