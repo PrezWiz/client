@@ -24,7 +24,6 @@ type IconsType = {
 };
 
 // TODO 확인 필요
-// ** Custom svg or images can be used as icons by returning a JSX **
 const icons = {
   // Custom icons
   blank: () => {
@@ -62,6 +61,9 @@ const icons = {
         alt="Card image 3"
       />
     );
+  },
+  kakao: () => {
+    return <Image src="/kakao.svg" width={20} height={20} alt="Kakao" />;
   },
 
   // Features
