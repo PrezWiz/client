@@ -1,3 +1,5 @@
+import nextConfigs from './nextConfigs/index.mjs';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -9,12 +11,11 @@ const nextConfig = {
     ],
   },
   async rewrites() {
-    return [
-      {
-        source: '/api/:path*',
-        destination: `${process.env.NEXT_PUBLIC_API_BASE_URL}/:path*`,
-      },
-    ];
+    return nextConfigs.rewrites;
+  },
+
+  async redirects() {
+    return nextConfigs.redirects;
   },
 };
 
