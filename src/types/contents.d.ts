@@ -1,4 +1,4 @@
-import { IconKeys } from '@/components/Icons';
+import { IconKeys } from '@/components/common/Icons';
 
 export type HeroHeader = {
   header: string;

@@ -1,7 +1,7 @@
 'use client';
 
 import { useTheme } from 'next-themes';
-import { Icons } from '@/components/Icons';
+import { Icons } from '@/components/common/Icons';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,

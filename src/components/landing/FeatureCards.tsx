@@ -1,5 +1,5 @@
 import HeadingText from '@/components/common/HeadingText';
-import { Icons } from '@/components/Icons';
+import { Icons } from '@/components/common/Icons';
 import { Card, CardDescription, CardTitle } from '@/components/ui/card';
 import { featureCards } from '@/config/landing-content';
 

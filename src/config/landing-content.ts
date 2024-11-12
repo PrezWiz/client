@@ -13,17 +13,17 @@ export const featureCards: ContentSection = {
     {
       text: `시간 절약`,
       subtext: `짧은 시간에 PPT와 대본을 완성해줍니다.`,
-      icon: 'featcard1',
+      icon: 'time',
     },
     {
       text: `자료 조사`,
       subtext: `gpt-4를 이용해 보다 최신의 정보까지 반영합니다.`,
-      icon: 'featcard2',
+      icon: 'fileSearch',
     },
     {
       text: `쉬운 사용`,
       subtext: `몇가지 키워드 입력만으로 PPT와 대본을 완성할수 있습니다.`,
-      icon: 'featcard3',
+      icon: 'cursorClick',
     },
   ],
 };

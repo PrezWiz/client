@@ -1,5 +1,5 @@
 import HeadingText from '@/components/common/HeadingText';
-import { Icons } from '@/components/Icons';
+import { Icons } from '@/components/common/Icons';
 import { features } from '@/config/landing-content';
 
 const Features = () => {
