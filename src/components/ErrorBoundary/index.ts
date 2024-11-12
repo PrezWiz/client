@@ -1,1 +1,2 @@
-export { default as ApiErrorBoundary } from './ApiErrorBoundary';
+export { default as GlobalErrorBoundary } from './GlobalErrorBoundary';
+export { default as ErrorHandler } from './ErrorHandler';

@@ -1,5 +1,6 @@
 import { Toaster } from 'react-hot-toast';
 import { Noto_Sans_KR } from 'next/font/google';
+import { ErrorHandler } from '@/components/ErrorBoundary';
 import Footer from '@/components/layout/Footer';
 import Navbar from '@/components/layout/Navbar';
 import { Providers } from '@/contexts';
@@ -24,7 +25,7 @@ const RootLayout = ({ children }: RootLayoutProps) => {
       <body className={`${noto_sans_kr.className} flex min-h-screen flex-col bg-background text-primary`}>
         <Providers>
           <Navbar />
-          {children}
+          <ErrorHandler>{children}</ErrorHandler>
           <Footer />
         </Providers>
         <Toaster />

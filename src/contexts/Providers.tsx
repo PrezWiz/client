@@ -1,5 +1,5 @@
 import { Provider as JotaiProvider } from 'jotai';
-import { ApiErrorBoundary } from '@/components/ErrorBoundary';
+import GlobalErrorBoundary from '@/components/ErrorBoundary/GlobalErrorBoundary';
 import { AuthProvider } from './AuthProvider';
 import { QueryClientProvider } from './QueryClientProvider';
 import { ThemeProvider } from './ThemeProvider';
@@ -7,13 +7,13 @@ import { ThemeProvider } from './ThemeProvider';
 const Providers = ({ children }: React.PropsWithChildren) => {
   return (
     <ThemeProvider>
-      <JotaiProvider>
-        <QueryClientProvider>
-          <ApiErrorBoundary>
+      <GlobalErrorBoundary>
+        <JotaiProvider>
+          <QueryClientProvider>
             <AuthProvider>{children}</AuthProvider>
-          </ApiErrorBoundary>
-        </QueryClientProvider>
-      </JotaiProvider>
+          </QueryClientProvider>
+        </JotaiProvider>
+      </GlobalErrorBoundary>
     </ThemeProvider>
   );
 };
