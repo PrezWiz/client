@@ -7,6 +7,7 @@ const queryKeys = createQueryKeyStore({
   },
   slide: {
     slides: null,
+    create: null,
   },
 });
 
