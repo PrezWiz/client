@@ -18,8 +18,6 @@ const formatDate = (isoString: string) => {
 };
 
 const TopicGrid = () => {
-  //const [topicList, setTopicList] = useState<Array<Topic>>([]);
-
   //TODO : api type
   const { data: topicList = [], isError } = useSuspenseQuery({
     ...queries.slide.slides,

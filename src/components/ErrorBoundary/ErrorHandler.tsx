@@ -1,12 +1,9 @@
 import { Suspense } from 'react';
 import Loading from '@/components/common/Loading';
+import { StrictPropsWithChildren } from '@/types/common';
 import ApiErrorBoundary from './ApiErrorBoundary';
 
-type Props = {
-  children: React.ReactNode;
-};
-
-const ErrorHandler = ({ children }: Props) => {
+const ErrorHandler = ({ children }: StrictPropsWithChildren) => {
   return (
     <ApiErrorBoundary>
       <Suspense fallback={<Loading />}>{children}</Suspense>

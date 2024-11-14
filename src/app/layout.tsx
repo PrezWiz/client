@@ -4,6 +4,7 @@ import { ErrorHandler } from '@/components/ErrorBoundary';
 import Footer from '@/components/layout/Footer';
 import Navbar from '@/components/layout/Navbar';
 import { Providers } from '@/contexts';
+import { StrictPropsWithChildren } from '@/types/common';
 import './globals.css';
 import { metadataConfig, viewportConfig } from './layout.config';
 
@@ -15,11 +16,7 @@ const noto_sans_kr = Noto_Sans_KR({
 export const metadata = metadataConfig;
 export const viewport = viewportConfig;
 
-type RootLayoutProps = {
-  children: React.ReactNode;
-};
-
-const RootLayout = ({ children }: RootLayoutProps) => {
+const RootLayout = ({ children }: StrictPropsWithChildren) => {
   return (
     <html suppressHydrationWarning lang="ko">
       <body className={`${noto_sans_kr.className} flex min-h-screen flex-col bg-background text-primary`}>
