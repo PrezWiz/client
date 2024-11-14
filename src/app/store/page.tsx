@@ -1,55 +1,29 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
-import Link from 'next/link'; // Link 컴포넌트 import
+import { useSuspenseQuery } from '@tanstack/react-query';
+import Link from 'next/link';
 import UnauthorizedDialog from '@/components/auth/UnauthorizedDialog';
 import HeadingText from '@/components/common/HeadingText';
+import { queries } from '@/queries';
 
-// JSON 데이터 타입 정의
-interface Topic {
-  id: number;
-  topic: string;
-  createdAt: string;
-}
+//TODO JSON 데이터 타입 정의
+
+// 날짜 형식 변환 함수 (YYYY-MM-DD)
+const formatDate = (isoString: string) => {
+  const date = new Date(isoString);
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
 
 const TopicGrid = () => {
-  const [topicList, setTopicList] = useState<Array<Topic>>([]);
-  const [isError, setIsError] = useState<boolean>(false);
-  const jwt = Cookies.get('authorization');
+  //const [topicList, setTopicList] = useState<Array<Topic>>([]);
 
-  // 데이터 가져오기
-  useEffect(() => {
-    const fetchTopics = () => {
-      fetch('/api/store', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${jwt}`,
-        },
-      })
-        .then(response => {
-          if (response.status === 200) {
-            return response.json();
-          } else {
-            setIsError(true);
-          }
-        })
-        .then(data => {
-          setTopicList(data);
-        });
-    };
-    fetchTopics();
-  }, [jwt]);
-
-  // 날짜 형식 변환 함수 (YYYY-MM-DD)
-  const formatDate = (isoString: string) => {
-    const date = new Date(isoString);
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
-    return `${year}-${month}-${day}`;
-  };
+  //TODO : api type
+  const { data: topicList = [], isError } = useSuspenseQuery({
+    ...queries.slide.slides,
+  });
 
   return (
     <main className="container flex flex-col items-center py-8">

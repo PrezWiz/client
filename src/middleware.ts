@@ -7,7 +7,7 @@ export const middleware = async (request: NextRequest) => {
   const { pathname } = request.nextUrl;
   const isPublicRoute = BASE_URL === pathname || PUBLIC_ROUTES.includes(pathname);
 
-  const cookie = getSession();
+  const cookie = await getSession();
   const session = await verifyToken(cookie);
 
   // 퍼블릭 경로가 아닌데 세션이 없는 경우

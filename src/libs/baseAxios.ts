@@ -13,8 +13,8 @@ const axiosConfig = {
 export const baseAxios = axios.create(axiosConfig);
 export const privateAxios = axios.create(axiosConfig);
 
-privateAxios.interceptors.request.use(config => {
-  config.headers.Authorization = `Bearer ${getSession()}`;
+privateAxios.interceptors.request.use(async config => {
+  config.headers.Authorization = `Bearer ${await getSession()}`;
   return config;
 });
 

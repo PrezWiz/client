@@ -9,7 +9,7 @@ export const deleteSession = () => {
   cookies().delete(cookieName);
 };
 
-export const getSession = () => {
+export const getSession = async () => {
   return cookies().get(cookieName)?.value;
 };
 

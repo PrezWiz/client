@@ -3,4 +3,7 @@ export const apiPaths = {
     login: '/login',
     register: '/member',
   },
+  slide: {
+    slides: '/store',
+  },
 } as const;
