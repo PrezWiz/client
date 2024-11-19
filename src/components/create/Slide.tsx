@@ -3,14 +3,14 @@ import { FaEdit, FaSave, FaTrash } from 'react-icons/fa';
 
 interface SlideProps {
   slide_number: number;
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   onDelete: () => void;
   onEdit: (updatedTitle: string, updatedDescription: string) => void;
   isEditing?: boolean; // 새 슬라이드를 추가할 때 수정 모드로 시작
 }
 
-const Slide = ({ slide_number, title, description, onDelete, onEdit, isEditing = false }: SlideProps) => {
+const Slide = ({ slide_number, title = '', description = '', onDelete, onEdit, isEditing = false }: SlideProps) => {
   const [isEditingState, setIsEditing] = useState<boolean>(isEditing); // 수정 모드 여부
   const [editTitle, setEditTitle] = useState<string>(title); // 수정 중인 제목
   const [editDescription, setEditDescription] = useState<string>(description); // 수정 중인 설명

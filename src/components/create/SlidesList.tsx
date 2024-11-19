@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import { Draggable } from 'react-beautiful-dnd';
-import Cookies from 'js-cookie';
+import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { FaPlus } from 'react-icons/fa';
+import { mutations } from '@/queries';
+import AddSlideButton from './AddSlideButton';
 import Slide from './Slide';
+import SlideContainer from './SlideContainer';
+import SubmitButton from './SubmitButton';
 
 // 슬라이드 데이터 타입 정의
 interface Slide {
@@ -12,24 +14,17 @@ interface Slide {
   slide_number: number;
 }
 
-// 서버로부터 응답받을 데이터 구조
-interface SlideResponse {
-  id: number;
-  topic: string;
-  createdAt: string; // LocalDateTime은 ISO 8601 문자열로 전송되므로 string 타입 사용
-}
-
 interface SlidesListProps {
   initialSlides: Slide[]; // 초기 슬라이드 데이터
-  topic: string | null; // 전달받은 토픽
+  id?: number;
 }
 
-const SlidesList = ({ initialSlides, topic }: SlidesListProps) => {
-  const [isLoading, setIsLoading] = useState<boolean>(false); // 로딩 상태
+const SlidesList = ({ initialSlides, id }: SlidesListProps) => {
   const [slides, setSlides] = useState<Slide[]>(initialSlides); // 슬라이드 상태 관리
   const [isAdding, setIsAdding] = useState<boolean>(false); // 새로운 슬라이드 추가 여부
-  const jwt = Cookies.get('authorization');
   const router = useRouter();
+
+  const { mutateAsync, isPending } = useMutation({ ...mutations.slide.create });
 
   // 슬라이드를 오름차순으로 정렬하는 함수
   const reorderSlides = (slides: Slide[]): Slide[] => {
@@ -65,37 +60,14 @@ const SlidesList = ({ initialSlides, topic }: SlidesListProps) => {
 
   // 슬라이드를 서버로 보내는 함수
   const handleSubmit = async () => {
-    if (!topic) {
-      console.error('Topic is missing');
+    if (!id) {
+      console.error('Presentation ID is missing');
       return;
     }
 
-    setIsLoading(true); // 요청 시작 시 로딩 상태 true
+    await mutateAsync({ id, slides });
 
-    try {
-      const response = await fetch('/api/create', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${jwt}`, // JWT 토큰 추가
-        },
-        body: JSON.stringify({ slides, topic }), // 본문 데이터 직렬화
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      // 응답을 SlideResponse 타입으로 처리
-      const data: SlideResponse = await response.json();
-
-      // /store/{id}로 이동
-      router.push(`/store/${data.id}`);
-    } catch (error) {
-      console.error('Request failed:', error); // 에러 처리
-    } finally {
-      setIsLoading(false); // 요청 완료 시 로딩 상태 false
-    }
+    router.push(`/store/${id}`);
   };
 
   const handleEdit = (newTitle: string, newDescription: string) => {
@@ -108,70 +80,27 @@ const SlidesList = ({ initialSlides, topic }: SlidesListProps) => {
     setIsAdding(false); // 추가 완료 후 추가 모드 종료
   };
 
+  if (isPending) {
+    return (
+      <div className="flex items-center justify-center">
+        <h1>서비스 환경에 따라 몇분정도 소요될수 있습니다..</h1>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-8">
-      {isLoading ? (
-        <div className="flex items-center justify-center">
-          <h1>서비스 환경에 따라 몇분정도 소요될수 있습니다..</h1>
-          <div className="h-10 w-10 animate-spin rounded-full border-4 border-dashed border-blue-500" />
-        </div>
-      ) : (
-        <div>
-          <div>
-            {slides.map((slide, index) => (
-              <Draggable key={slide.slide_number} draggableId={String(slide.slide_number)} index={index}>
-                {provided => (
-                  <div
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                    className="mb-4" // 슬라이드 간격 추가
-                  >
-                    <Slide
-                      slide_number={slide.slide_number}
-                      title={slide.title}
-                      description={slide.description}
-                      onDelete={() => handleDeleteSlide(slide.slide_number)}
-                      onEdit={(updatedTitle, updatedDescription) =>
-                        handleEditSlide(slide.slide_number, updatedTitle, updatedDescription)
-                      }
-                    />
-                  </div>
-                )}
-              </Draggable>
-            ))}
-          </div>
-
-          {/* 새로운 슬라이드 추가 모드 */}
-          {isAdding && (
-            <Slide
-              slide_number={slides.length + 1}
-              title=""
-              description=""
-              isEditing={true} // 수정 모드로 시작
-              onDelete={() => setIsAdding(false)} // 취소하면 슬라이드 추가 중지
-              onEdit={handleEdit}
-            />
-          )}
-
-          {/* 새로운 슬라이드를 추가하는 버튼 */}
-          <div className="mt-4 flex justify-center">
-            <button
-              className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-500 text-white"
-              onClick={handleAddSlide}
-            >
-              <FaPlus />
-            </button>
-          </div>
-
-          {/* 생성 버튼 */}
-          <div className="mt-8 flex justify-center">
-            <button className="rounded-md bg-blue-500 px-4 py-2 text-white" onClick={handleSubmit}>
-              생성
-            </button>
-          </div>
-        </div>
+      <SlideContainer slides={slides} onDelete={handleDeleteSlide} onEdit={handleEditSlide} />
+      {isAdding && (
+        <Slide
+          slide_number={slides.length + 1}
+          isEditing={true} // 수정 모드로 시작
+          onDelete={() => setIsAdding(false)} // 취소하면 슬라이드 추가 중지
+          onEdit={handleEdit}
+        />
       )}
+      <AddSlideButton onClick={handleAddSlide} />
+      <SubmitButton onClick={handleSubmit} />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-interface Slide {
+export interface Slide {
   title: string;
   description: string;
   slide_number: number;
@@ -6,4 +6,9 @@ interface Slide {
 
 export interface SlideResponse {
   slides: Slide[];
+}
+
+export interface CreateOutlinesResponse {
+  presentationId: number;
+  prototypesDto: { slides: Slide[] };
 }

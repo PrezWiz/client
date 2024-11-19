@@ -5,6 +5,7 @@ export const apiPaths = {
   },
   slide: {
     slides: '/store',
-    create: '/contents',
+    createOutlines: '/prez/prototype',
+    create: '/prez/slides',
   },
 } as const;
