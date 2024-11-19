@@ -13,24 +13,16 @@ interface SlideProps {
 
 const Slide = ({ slideNumber, title = '', description = '', onDelete, onEdit, isEditing = false }: SlideProps) => {
   const [isEditingState, setIsEditing] = useState<boolean>(isEditing);
-  const [editTitle, setEditTitle] = useState<string>(title);
-  const [editDescription, setEditDescription] = useState<string>(description);
 
-  const handleSave = () => {
-    onEdit(editTitle, editDescription);
+  const handleSave = (title: string, description: string) => {
+    onEdit(title, description);
     setIsEditing(false);
   };
 
   return (
     <div className="flex items-start justify-between rounded-md border p-4">
       {isEditingState ? (
-        <SlideEditForm
-          editTitle={editTitle}
-          editDescription={editDescription}
-          setEditTitle={setEditTitle}
-          setEditDescription={setEditDescription}
-          onSave={handleSave}
-        />
+        <SlideEditForm title={title} description={description} onSave={handleSave} />
       ) : (
         <SlideCard
           slideNumber={slideNumber}

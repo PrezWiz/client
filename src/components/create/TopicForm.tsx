@@ -1,15 +1,17 @@
+'use client';
+
 import { useState } from 'react';
 
-interface TopicFormProps {
-  onSubmit: (topic: string) => void; // 주제를 제출할 때 호출할 함수
-}
+type TopicFormProps = {
+  onNext: (topic: string) => void;
+};
 
-const TopicForm = ({ onSubmit }: TopicFormProps) => {
+const TopicForm = ({ onNext }: TopicFormProps) => {
   const [topicInput, setTopicInput] = useState<string>('');
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onSubmit(topicInput); // 부모 컴포넌트로 주제 전달
+    onNext(topicInput);
   };
 
   return (
@@ -27,7 +29,7 @@ const TopicForm = ({ onSubmit }: TopicFormProps) => {
         onChange={e => setTopicInput(e.target.value)}
       />
       <button type="submit" className="rounded-md bg-blue-500 p-2 text-white">
-        Submit
+        생성
       </button>
     </form>
   );

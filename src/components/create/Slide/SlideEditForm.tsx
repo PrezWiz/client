@@ -1,36 +1,45 @@
 'use client';
 
+import { useState } from 'react';
 import { Save } from 'lucide-react';
 
 type EditModeProps = {
-  editTitle: string;
-  editDescription: string;
-  setEditTitle: (title: string) => void;
-  setEditDescription: (description: string) => void;
-  onSave: () => void;
+  title: string;
+  description: string;
+  onSave: (title: string, description: string) => void;
 };
 
-const SlideEditForm = ({ editTitle, editDescription, setEditTitle, setEditDescription, onSave }: EditModeProps) => {
+const SlideEditForm = ({ title, description, onSave }: EditModeProps) => {
+  const [values, setValues] = useState<{ title: string; description: string }>({ title, description });
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    onSave(values.title, values.description);
+  };
+
   return (
-    <div className="flex-1">
+    <form className="flex-1" onSubmit={handleSubmit}>
       <input
+        required
         type="text"
-        value={editTitle}
+        value={values.title}
         className="mb-2 w-full rounded-md border p-2"
         placeholder="슬라이드 제목"
-        onChange={e => setEditTitle(e.target.value)}
+        onChange={e => setValues({ ...values, title: e.target.value })}
       />
       <textarea
-        value={editDescription}
+        required
+        value={values.description}
         className="w-full rounded-md border p-2"
         placeholder="슬라이드 설명"
-        onChange={e => setEditDescription(e.target.value)}
+        onChange={e => setValues({ ...values, description: e.target.value })}
       />
-      <button className="mt-2 flex items-center rounded-md bg-green-500 p-2 text-white" onClick={onSave}>
+      <button type="submit" className="mt-2 flex items-center rounded-md bg-green-500 p-2 text-white">
         <Save className="mr-2 h-4 w-4" />
         저장
       </button>
-    </div>
+    </form>
   );
 };
 

@@ -1,14 +1,14 @@
 import { Slide as SlideType } from '@/types/slide';
 import Slide from './Slide/Slide';
 
-interface SlideContainerProps {
+type SlideContainerProps = {
   slides: SlideType[];
   onDelete: (slideNumber: number) => void;
   onEdit: (slideNumber: number, title: string, description: string) => void;
-}
+};
 
 const SlideContainer = ({ slides, onDelete, onEdit }: SlideContainerProps) => (
-  <div>
+  <>
     {slides.map((slide, index) => (
       <div key={index} className="mb-4">
         <Slide
@@ -20,7 +20,7 @@ const SlideContainer = ({ slides, onDelete, onEdit }: SlideContainerProps) => (
         />
       </div>
     ))}
-  </div>
+  </>
 );
 
 export default SlideContainer;
