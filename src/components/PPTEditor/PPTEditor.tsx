@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { generatePPT } from '@/libs/pptx';
 import { Slide as SlideType } from '@/types/slide';
 import EditorToolbar from './EditorToolbar';
@@ -24,6 +24,7 @@ const PPTEditor = ({ slides: initialSlides }: PPTEditorProps) => {
       content: '새로운 내용',
     };
     setSlides([...slides, newSlide]);
+    setActiveSlide(slides.length);
   };
 
   const deleteSlide = (targetIndex: number) => {
@@ -41,6 +42,11 @@ const PPTEditor = ({ slides: initialSlides }: PPTEditorProps) => {
   const handleContentChange = (targetIndex: number, value: string) => {
     setSlides(slides.map((slide, index) => (index === targetIndex ? { ...slide, content: value } : slide)));
   };
+
+  useEffect(() => {
+    swiper?.slideTo(activeSlide);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeSlide]);
 
   return (
     <div className="fixed inset-0 z-10 h-screen bg-gray-100">
@@ -61,7 +67,6 @@ const PPTEditor = ({ slides: initialSlides }: PPTEditorProps) => {
           deleteSlide={deleteSlide}
           savePresentation={savePresentation}
           setActiveSlide={setActiveSlide}
-          swiper={swiper}
         />
       </div>
     </div>

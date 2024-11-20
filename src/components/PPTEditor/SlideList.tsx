@@ -1,5 +1,4 @@
 import { Plus, Save, Trash2 } from 'lucide-react';
-import { Swiper as SwiperType } from 'swiper/types';
 import { Button } from '@/components/ui/button';
 import { Slide } from '@/types/slide';
 
@@ -10,7 +9,6 @@ type SlideListProps = {
   deleteSlide: (id: number) => void;
   savePresentation: () => void;
   setActiveSlide: (slide: number) => void;
-  swiper: SwiperType | null;
 };
 
 const SlideList = ({
@@ -20,7 +18,6 @@ const SlideList = ({
   deleteSlide,
   savePresentation,
   setActiveSlide,
-  swiper,
 }: SlideListProps) => {
   return (
     <div className="h-full w-[18rem] flex-shrink-0 overflow-y-auto rounded-lg bg-white p-4 shadow-lg">
@@ -36,10 +33,7 @@ const SlideList = ({
           key={index}
           type="button"
           className={`mb-2 block w-full cursor-pointer rounded border p-2 text-left ${index === activeSlide ? 'border-blue-500 bg-blue-50' : 'border-gray-200'}`}
-          onClick={() => {
-            setActiveSlide(index);
-            swiper?.slideTo(index);
-          }}
+          onClick={() => setActiveSlide(index)}
         >
           <div className="flex items-center justify-between">
             <span className="w-3/4 overflow-hidden text-ellipsis whitespace-nowrap text-sm" title={slide.title}>
