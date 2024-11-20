@@ -5,18 +5,18 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import { mutations } from '@/queries';
-import { Slide } from '@/types/slide';
+import { Outline } from '@/types/slide';
 
-const reorderOutlines = (outlines: Slide[]): Slide[] => {
+const reorderOutlines = (outlines: Outline[]): Outline[] => {
   return outlines.map((outline, index) => ({
     ...outline,
     slide_number: index + 1,
   }));
 };
 
-const useSlideOutline = (initialOutlines: Slide[], id: number) => {
+const useSlideOutline = (initialOutlines: Outline[], id: number) => {
   const queryClient = useQueryClient();
-  const [outlines, setOutlines] = useState<Slide[]>(initialOutlines);
+  const [outlines, setOutlines] = useState<Outline[]>(initialOutlines);
   const [isAdding, setIsAdding] = useState<boolean>(false);
 
   const router = useRouter();
@@ -54,7 +54,7 @@ const useSlideOutline = (initialOutlines: Slide[], id: number) => {
   };
 
   const handleNewOutline = (title: string, description: string) => {
-    const newOutline: Slide = {
+    const newOutline = {
       title,
       description,
       slide_number: outlines.length + 1,

@@ -1,6 +1,6 @@
 import { apis } from '@/apis';
 import { queryKeys } from '@/libs/queryKeys';
-import { Slide } from '@/types/slide';
+import { Outline } from '@/types/slide';
 
 export const slideMutations = {
   createOutlines: {
@@ -9,6 +9,6 @@ export const slideMutations = {
   },
   create: {
     mutationKey: queryKeys.slide.create.queryKey,
-    mutationFn: ({ id, outlines }: { id: number; outlines: Slide[] }) => apis.slide.create({ id, outlines }),
+    mutationFn: ({ id, outlines }: { id: number; outlines: Outline[] }) => apis.slide.create({ id, outlines }),
   },
 } as const;

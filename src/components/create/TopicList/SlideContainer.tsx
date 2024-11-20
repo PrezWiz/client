@@ -1,8 +1,8 @@
 import { Slide } from '@/components/create/Slide';
-import { Slide as SlideType } from '@/types/slide';
+import { Outline } from '@/types/slide';
 
 type SlideContainerProps = {
-  outlines: SlideType[];
+  outlines: Outline[];
   onDelete: (slideNumber: number) => void;
   onEdit: (slideNumber: number, title: string, description: string) => void;
 };
