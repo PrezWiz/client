@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast';
 import pptxgen from 'pptxgenjs';
 import { Slide } from '@/types/slide';
 import { generateFileName, getContentPreset, getDividerPreset, getTitlePreset } from './utils';
@@ -13,7 +14,11 @@ const generatePPT = (slides: Slide[]) => {
     slot.addText(slide.content, getContentPreset(pres.AlignV.top));
   });
 
-  pres.writeFile({ fileName: generateFileName(slides[0].title) });
+  try {
+    pres.writeFile({ fileName: generateFileName(slides[0].title) });
+  } catch (error) {
+    toast.error('파일 생성에 실패했어요. 다시 시도해주세요.');
+  }
 };
 
 export default generatePPT;

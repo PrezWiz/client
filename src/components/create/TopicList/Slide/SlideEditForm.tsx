@@ -25,14 +25,13 @@ const SlideEditForm = ({ title, description, onSave }: EditModeProps) => {
         type="text"
         value={values.title}
         className="mb-2 w-full rounded-md border p-2"
-        placeholder="슬라이드 제목"
+        placeholder="어떤 주제를 다루는지 작성해주세요"
         onChange={e => setValues({ ...values, title: e.target.value })}
       />
       <textarea
-        required
         value={values.description}
         className="w-full rounded-md border p-2"
-        placeholder="슬라이드 설명"
+        placeholder="어떤 내용을 다루는지 설명해주세요"
         onChange={e => setValues({ ...values, description: e.target.value })}
       />
       <button type="submit" className="mt-2 flex items-center rounded-md bg-green-500 p-2 text-white">
