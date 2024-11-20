@@ -1,3 +1,4 @@
+import { PPTEditor } from '@/components/PPTEditor';
 import { useCreationSlideQueries } from '@/hooks/useCreationSlideQueries';
 
 type SlideEditorProps = {
@@ -5,9 +6,15 @@ type SlideEditorProps = {
 };
 
 const SlideEditor = ({ onNext }: SlideEditorProps) => {
-  const { presentationId, slides } = useCreationSlideQueries();
+  const { presentationId, slides = [] } = useCreationSlideQueries();
 
-  return <div>SlideEditor</div>;
+  if (!slides.length) return null;
+
+  return (
+    <>
+      <PPTEditor slides={slides} />
+    </>
+  );
 };
 
 export default SlideEditor;

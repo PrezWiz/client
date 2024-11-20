@@ -1,5 +1,6 @@
 import { Toaster } from 'react-hot-toast';
 import { Noto_Sans_KR } from 'next/font/google';
+import 'swiper/css';
 import { ErrorHandler } from '@/components/ErrorBoundary';
 import Footer from '@/components/layout/Footer';
 import Navbar from '@/components/layout/Navbar';
