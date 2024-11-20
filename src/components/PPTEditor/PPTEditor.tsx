@@ -10,9 +10,10 @@ import type { Swiper as SwiperType } from 'swiper/types';
 
 type PPTEditorProps = {
   slides: SlideType[];
+  onPrev?: () => void;
 };
 
-const PPTEditor = ({ slides: initialSlides }: PPTEditorProps) => {
+const PPTEditor = ({ slides: initialSlides, onPrev }: PPTEditorProps) => {
   const [slides, setSlides] = useState(initialSlides);
   const [activeSlide, setActiveSlide] = useState(0);
   const [swiper, setSwiper] = useState<SwiperType | null>(null);
@@ -50,7 +51,7 @@ const PPTEditor = ({ slides: initialSlides }: PPTEditorProps) => {
 
   return (
     <div className="fixed inset-0 z-10 h-screen bg-gray-100">
-      <EditorToolbar />
+      <EditorToolbar onPrev={onPrev} />
       <div className="flex h-[calc(100%-3.5rem)] w-full gap-4 p-4">
         <SlideViewer
           slides={slides}

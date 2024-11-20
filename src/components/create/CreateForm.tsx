@@ -24,7 +24,7 @@ const CreateForm = () => {
         <TopicList onNext={() => setStep(StepName.EDIT_SLIDES)} />
       </Funnel.Step>
       <Funnel.Step name={StepName.EDIT_SLIDES}>
-        <SlideEditor onNext={() => setStep(StepName.COMPLETE)} />
+        <SlideEditor onPrev={() => setStep(StepName.EDIT_OUTLINE)} onNext={() => setStep(StepName.COMPLETE)} />
       </Funnel.Step>
     </Funnel>
   );
