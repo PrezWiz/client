@@ -1,10 +1,10 @@
 import LoadingComponent from '@/components/common/LoadingComponent';
-import Slide from '@/components/create/Slide/Slide';
 import SlideCreationLoading from '@/components/create/SlideCreationLoading';
 import SubmitButton from '@/components/create/SubmitButton';
 import { useCreationSlideQueries } from '@/hooks/useCreationSlideQueries';
 import useSlideOutline from '@/hooks/useSlideOutline';
 import AddSlideButton from './AddSlideButton';
+import { Slide } from './Slide';
 import SlideContainer from './SlideContainer';
 
 type TopicListProps = {

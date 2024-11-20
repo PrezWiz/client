@@ -1,5 +1,5 @@
-import { Slide } from '@/components/create/Slide';
 import { Outline } from '@/types/slide';
+import { Slide } from './Slide';
 
 type SlideContainerProps = {
   outlines: Outline[];
