@@ -9,6 +9,6 @@ export const slideMutations = {
   },
   create: {
     mutationKey: queryKeys.slide.create.queryKey,
-    mutationFn: ({ id, slides }: { id: number; slides: Slide[] }) => apis.slide.create({ id, slides }),
+    mutationFn: ({ id, outlines }: { id: number; outlines: Slide[] }) => apis.slide.create({ id, outlines }),
   },
 } as const;

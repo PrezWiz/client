@@ -6,39 +6,45 @@ import useSlideOutline from '@/hooks/useSlideOutline';
 import AddSlideButton from './AddSlideButton';
 import SlideContainer from './SlideContainer';
 
-interface Slide {
+interface Outline {
   title: string;
   description: string;
   slide_number: number;
 }
 
 type TopicListProps = {
-  initialSlides: Slide[];
-  id?: number;
+  initialOutlines: Outline[];
+  id: number;
+  onNext: () => void;
 };
 
-const TopicList = ({ initialSlides, id }: TopicListProps) => {
+const TopicList = ({ initialOutlines, id, onNext }: TopicListProps) => {
   const {
-    slides,
+    outlines,
     isAdding,
     isPending,
-    handleDeleteSlide,
-    handleEditSlide,
-    handleAddSlide,
-    handleNewSlide,
+    handleDeleteOutline,
+    handleEditOutline,
+    handleAddOutline,
+    handleNewOutline,
     handleSubmit,
     handleCancelAdd,
-  } = useSlideOutline(initialSlides, id);
+  } = useSlideOutline(initialOutlines, id);
+
+  const handleNext = () => {
+    handleSubmit();
+    onNext();
+  };
 
   return (
     <LoadingComponent isLoading={isPending} fallback={<SlideCreationLoading />}>
       <div className="space-y-8">
-        <SlideContainer slides={slides} onDelete={handleDeleteSlide} onEdit={handleEditSlide} />
+        <SlideContainer outlines={outlines} onDelete={handleDeleteOutline} onEdit={handleEditOutline} />
         {isAdding && (
-          <Slide isEditing slideNumber={slides.length + 1} onDelete={handleCancelAdd} onEdit={handleNewSlide} />
+          <Slide isEditing slideNumber={outlines.length + 1} onDelete={handleCancelAdd} onEdit={handleNewOutline} />
         )}
-        <AddSlideButton onClick={handleAddSlide} />
-        <SubmitButton onClick={handleSubmit} />
+        <AddSlideButton onClick={handleAddOutline} />
+        <SubmitButton onClick={handleNext} />
       </div>
     </LoadingComponent>
   );

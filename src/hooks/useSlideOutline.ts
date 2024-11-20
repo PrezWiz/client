@@ -7,53 +7,53 @@ import { useRouter } from 'next/navigation';
 import { mutations } from '@/queries';
 import { Slide } from '@/types/slide';
 
-const reorderSlides = (slides: Slide[]): Slide[] => {
-  return slides.map((slide, index) => ({
-    ...slide,
+const reorderOutlines = (outlines: Slide[]): Slide[] => {
+  return outlines.map((outline, index) => ({
+    ...outline,
     slide_number: index + 1,
   }));
 };
 
-const useSlideOutline = (initialSlides: Slide[], id?: number) => {
-  const [slides, setSlides] = useState<Slide[]>(initialSlides);
+const useSlideOutline = (initialOutlines: Slide[], id: number) => {
+  const [outlines, setOutlines] = useState<Slide[]>(initialOutlines);
   const [isAdding, setIsAdding] = useState<boolean>(false);
 
   const router = useRouter();
 
   const { mutateAsync, isPending } = useMutation({ ...mutations.slide.create });
 
-  const handleDeleteSlide = (slideNumber: number) => {
-    const updatedSlides = slides.filter(slide => slide.slide_number !== slideNumber);
+  const handleDeleteOutline = (slideNumber: number) => {
+    const updatedOutlines = outlines.filter(outline => outline.slide_number !== slideNumber);
 
-    setSlides(reorderSlides(updatedSlides));
+    setOutlines(reorderOutlines(updatedOutlines));
   };
 
-  const handleEditSlide = (slideNumber: number, title: string, description: string) => {
-    const updatedSlides = slides.map(slide => {
-      if (slide.slide_number === slideNumber) {
+  const handleEditOutline = (slideNumber: number, title: string, description: string) => {
+    const updatedOutlines = outlines.map(outline => {
+      if (outline.slide_number === slideNumber) {
         return {
-          ...slide,
+          ...outline,
           title,
           description,
         };
       }
-      return slide;
+      return outline;
     });
-    setSlides(updatedSlides);
+    setOutlines(updatedOutlines);
     setIsAdding(false);
   };
 
-  const handleAddSlide = () => {
+  const handleAddOutline = () => {
     setIsAdding(true);
   };
 
-  const handleNewSlide = (title: string, description: string) => {
-    const newSlide: Slide = {
+  const handleNewOutline = (title: string, description: string) => {
+    const newOutline: Slide = {
       title,
       description,
-      slide_number: slides.length + 1,
+      slide_number: outlines.length + 1,
     };
-    setSlides([...slides, newSlide]);
+    setOutlines([...outlines, newOutline]);
     setIsAdding(false);
   };
 
@@ -64,8 +64,7 @@ const useSlideOutline = (initialSlides: Slide[], id?: number) => {
       return;
     }
 
-    await mutateAsync({ id, slides });
-    router.push(`/store/${id}`);
+    await mutateAsync({ id, outlines });
   };
 
   const handleCancelAdd = () => {
@@ -73,13 +72,13 @@ const useSlideOutline = (initialSlides: Slide[], id?: number) => {
   };
 
   return {
-    slides,
+    outlines,
     isAdding,
     isPending,
-    handleDeleteSlide,
-    handleEditSlide,
-    handleAddSlide,
-    handleNewSlide,
+    handleDeleteOutline,
+    handleEditOutline,
+    handleAddOutline,
+    handleNewOutline,
     handleSubmit,
     handleCancelAdd,
   };

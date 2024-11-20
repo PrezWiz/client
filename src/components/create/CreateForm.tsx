@@ -10,7 +10,8 @@ import { TopicList } from './TopicList';
 
 const StepName = {
   WRITE_FORM: 'WRITE_FORM',
-  EDIT_CONTENTS: 'EDIT_CONTENTS',
+  EDIT_OUTLINE: 'EDIT_OUTLINE',
+  EDIT_SLIDES: 'EDIT_SLIDES',
 } as const;
 
 const CreateForm = () => {
@@ -18,14 +19,16 @@ const CreateForm = () => {
 
   const {
     mutateAsync,
-    data: { prototypesDto: { slides } = { slides: [] }, presentationId } = {},
+    data: { prototypesDto: { slides: outlines } = { slides: [] }, presentationId: id } = {},
     isPending,
   } = useMutation({
     ...mutations.slide.createOutlines,
     onSuccess: () => {
-      setStep(StepName.EDIT_CONTENTS);
+      setStep(StepName.EDIT_OUTLINE);
     },
   });
+
+  const presentationId = Number(id);
 
   const handleCreateOutline = async (topic: string) => {
     await mutateAsync(topic);
@@ -38,8 +41,8 @@ const CreateForm = () => {
           <TopicForm onNext={handleCreateOutline} />
         </LoadingComponent>
       </Funnel.Step>
-      <Funnel.Step name={StepName.EDIT_CONTENTS}>
-        <TopicList initialSlides={slides} id={presentationId} />
+      <Funnel.Step name={StepName.EDIT_OUTLINE}>
+        <TopicList initialOutlines={outlines} id={presentationId} onNext={() => setStep(StepName.EDIT_SLIDES)} />
       </Funnel.Step>
     </Funnel>
   );

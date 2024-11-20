@@ -16,8 +16,8 @@ export const slideApis = {
 
     return response;
   },
-  create: async ({ id, slides }: { id: number; slides: Slide[] }) => {
-    const response = await extractAxiosData(privateAxios.post(`${apiPaths.slide.create}/${id}`, { slides }));
+  create: async ({ id, outlines }: { id: number; outlines: Slide[] }) => {
+    const response = await extractAxiosData(privateAxios.post(`${apiPaths.slide.create}/${id}`, { slides: outlines }));
 
     return response;
   },
