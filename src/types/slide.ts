@@ -12,3 +12,6 @@ export interface CreateOutlinesResponse {
   presentationId: number;
   prototypesDto: { slides: Slide[] };
 }
+export interface CreateSlidesResponse {
+  slides: Slide[];
+}

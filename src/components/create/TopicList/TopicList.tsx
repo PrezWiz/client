@@ -2,23 +2,18 @@ import LoadingComponent from '@/components/common/LoadingComponent';
 import Slide from '@/components/create/Slide/Slide';
 import SlideCreationLoading from '@/components/create/SlideCreationLoading';
 import SubmitButton from '@/components/create/SubmitButton';
+import { useCreationSlideQueries } from '@/hooks/useCreationSlideQueries';
 import useSlideOutline from '@/hooks/useSlideOutline';
 import AddSlideButton from './AddSlideButton';
 import SlideContainer from './SlideContainer';
 
-interface Outline {
-  title: string;
-  description: string;
-  slide_number: number;
-}
-
 type TopicListProps = {
-  initialOutlines: Outline[];
-  id: number;
   onNext: () => void;
 };
 
-const TopicList = ({ initialOutlines, id, onNext }: TopicListProps) => {
+const TopicList = ({ onNext }: TopicListProps) => {
+  const { presentationId, outlines: initialOutlines } = useCreationSlideQueries();
+
   const {
     outlines,
     isAdding,
@@ -29,10 +24,10 @@ const TopicList = ({ initialOutlines, id, onNext }: TopicListProps) => {
     handleNewOutline,
     handleSubmit,
     handleCancelAdd,
-  } = useSlideOutline(initialOutlines, id);
+  } = useSlideOutline(initialOutlines, presentationId!);
 
-  const handleNext = () => {
-    handleSubmit();
+  const handleNext = async () => {
+    await handleSubmit();
     onNext();
   };
 

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import { mutations } from '@/queries';
@@ -15,12 +15,18 @@ const reorderOutlines = (outlines: Slide[]): Slide[] => {
 };
 
 const useSlideOutline = (initialOutlines: Slide[], id: number) => {
+  const queryClient = useQueryClient();
   const [outlines, setOutlines] = useState<Slide[]>(initialOutlines);
   const [isAdding, setIsAdding] = useState<boolean>(false);
 
   const router = useRouter();
 
-  const { mutateAsync, isPending } = useMutation({ ...mutations.slide.create });
+  const { mutateAsync, isPending } = useMutation({
+    ...mutations.slide.create,
+    onSuccess: async data => {
+      await queryClient.setQueryData(mutations.slide.create.mutationKey, data);
+    },
+  });
 
   const handleDeleteOutline = (slideNumber: number) => {
     const updatedOutlines = outlines.filter(outline => outline.slide_number !== slideNumber);

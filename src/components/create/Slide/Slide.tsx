@@ -2,14 +2,14 @@ import { useState } from 'react';
 import SlideCard from './SlideCard';
 import SlideEditForm from './SlideEditForm';
 
-interface SlideProps {
+type SlideProps = {
   slideNumber: number;
   title?: string;
   description?: string;
   onDelete: () => void;
-  onEdit: (updatedTitle: string, updatedDescription: string) => void;
+  onEdit: (title: string, description: string) => void;
   isEditing?: boolean;
-}
+};
 
 const Slide = ({ slideNumber, title = '', description = '', onDelete, onEdit, isEditing = false }: SlideProps) => {
   const [isEditingState, setIsEditing] = useState<boolean>(isEditing);
