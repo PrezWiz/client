@@ -1,10 +1,10 @@
 'use client';
 
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { type Dispatch, type SetStateAction, useRef } from 'react';
+import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Swiper as SwiperType } from 'swiper/types';
 import { Slide } from '@/types/slide';
-import type { Dispatch, SetStateAction } from 'react';
 
 type SlideViewerProps = {
   swiper: SwiperType | null;
@@ -23,6 +23,16 @@ const SlideViewer = ({
   handleTitleChange,
   handleContentChange,
 }: SlideViewerProps) => {
+  const sliderRef = useRef<SwiperRef>(null);
+
+  const onSlideChange = (swiper: SwiperType) => {
+    setActiveSlide(swiper.activeIndex);
+  };
+
+  const onTransitionEnd = (swiper: SwiperType) => {
+    sliderRef.current?.swiper.slides[swiper.activeIndex].querySelector('input')?.focus();
+  };
+
   return (
     <div className="w-[calc(100%-19rem)] flex-1">
       <div className="relative h-full w-full overflow-hidden rounded-lg bg-white p-4 shadow-lg">
@@ -42,10 +52,12 @@ const SlideViewer = ({
         </button>
 
         <Swiper
-          spaceBetween={0}
+          spaceBetween={25}
           className="h-full w-full"
+          ref={sliderRef}
           onSwiper={setSwiper}
-          onSlideChange={swiper => setActiveSlide(swiper.activeIndex)}
+          onSlideChange={onSlideChange}
+          onTransitionEnd={onTransitionEnd}
         >
           {slides.map((slide, index) => (
             <SwiperSlide key={index}>
