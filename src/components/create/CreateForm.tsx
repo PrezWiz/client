@@ -6,7 +6,7 @@ import LoadingComponent from '@/components/common/LoadingComponent';
 import useFunnel from '@/hooks/useFunnel';
 import { mutations } from '@/queries';
 import TopicForm from './TopicForm';
-import TopicList from './TopicList';
+import { TopicList } from './TopicList';
 
 const StepName = {
   WRITE_FORM: 'WRITE_FORM',

@@ -1,5 +1,5 @@
+import { Slide } from '@/components/create/Slide';
 import { Slide as SlideType } from '@/types/slide';
-import Slide from './Slide/Slide';
 
 type SlideContainerProps = {
   slides: SlideType[];

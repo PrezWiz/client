@@ -1,10 +1,10 @@
 import LoadingComponent from '@/components/common/LoadingComponent';
+import Slide from '@/components/create/Slide/Slide';
+import SlideCreationLoading from '@/components/create/SlideCreationLoading';
+import SubmitButton from '@/components/create/SubmitButton';
 import useSlideOutline from '@/hooks/useSlideOutline';
 import AddSlideButton from './AddSlideButton';
-import Slide from './Slide/Slide';
 import SlideContainer from './SlideContainer';
-import SlideCreationLoading from './SlideCreationLoading';
-import SubmitButton from './SubmitButton';
 
 interface Slide {
   title: string;

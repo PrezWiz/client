@@ -1,17 +1,17 @@
 'use client';
 
-import { useState } from 'react';
-
 type TopicFormProps = {
   onNext: (topic: string) => void;
 };
 
 const TopicForm = ({ onNext }: TopicFormProps) => {
-  const [topicInput, setTopicInput] = useState<string>('');
-
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onNext(topicInput);
+
+    const formData = new FormData(event.currentTarget);
+    const topic = formData.get('topicInput') as string;
+
+    onNext(topic);
   };
 
   return (
@@ -23,10 +23,9 @@ const TopicForm = ({ onNext }: TopicFormProps) => {
         required
         type="text"
         id="topicInput"
-        value={topicInput}
+        name="topicInput"
         className="rounded-md border border-gray-300 p-2"
         placeholder="예시: 수요와 공급"
-        onChange={e => setTopicInput(e.target.value)}
       />
       <button type="submit" className="rounded-md bg-blue-500 p-2 text-white">
         생성
