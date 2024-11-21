@@ -8,4 +8,7 @@ export const apiPaths = {
     createOutlines: '/prez/prototype',
     create: '/prez/slides',
   },
+  contact: {
+    sendMessage: '/contact',
+  },
 } as const;

@@ -10,6 +10,9 @@ const queryKeys = createQueryKeyStore({
     createOutlines: null,
     create: null,
   },
+  contact: {
+    sendMessage: null,
+  },
 });
 
 export { queryKeys };
