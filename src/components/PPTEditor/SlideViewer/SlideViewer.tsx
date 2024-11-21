@@ -5,6 +5,8 @@ import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Swiper as SwiperType } from 'swiper/types';
 import { Slide } from '@/types/presentation';
+import BasicSlide from './Slide/BasicSlide';
+import CoverSlide from './Slide/CoverSlide';
 
 type SlideViewerProps = {
   swiper: SwiperType | null;
@@ -59,27 +61,20 @@ const SlideViewer = ({
           onSlideChange={onSlideChange}
           onTransitionEnd={onTransitionEnd}
         >
-          {slides.map((slide, index) => (
-            <SwiperSlide key={index}>
-              <div className="h-full w-full rounded-lg border-2 border-dashed border-gray-300 p-6 px-12">
-                <div className="h-[15%]">
-                  <input
-                    className="mb-2 h-full w-full border-b-2 border-gray-300 bg-transparent p-2 text-3xl font-semibold focus:outline-none"
-                    value={slide.title}
-                    maxLength={40}
-                    onChange={e => handleTitleChange(index, e.target.value)}
-                  />
-                </div>
-                <div className="h-[85%] pt-4">
-                  <textarea
-                    className="h-full w-full resize-none rounded border border-none bg-transparent p-2 text-2xl leading-[1.7] focus:outline-none"
-                    value={slide.content}
-                    onChange={e => handleContentChange(index, e.target.value)}
-                  />
-                </div>
-              </div>
-            </SwiperSlide>
-          ))}
+          {slides.map((slide, index) => {
+            const SlideComponent = index === 0 ? CoverSlide : BasicSlide;
+
+            return (
+              <SwiperSlide key={index}>
+                <SlideComponent
+                  title={slide.title}
+                  description={slide.content}
+                  handleTitleChange={value => handleTitleChange(index, value)}
+                  handleDescriptionChange={value => handleContentChange(index, value)}
+                />
+              </SwiperSlide>
+            );
+          })}
         </Swiper>
       </div>
     </div>

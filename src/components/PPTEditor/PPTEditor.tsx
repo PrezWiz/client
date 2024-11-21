@@ -5,7 +5,7 @@ import { generatePPT } from '@/libs/pptx';
 import { Slide as SlideType } from '@/types/presentation';
 import EditorToolbar from './EditorToolbar';
 import { SlideListContainer } from './SlideList';
-import SlideViewer from './SlideViewer';
+import SlideViewer from './SlideViewer/SlideViewer';
 import type { Swiper as SwiperType } from 'swiper/types';
 
 type PPTEditorProps = {

@@ -1,17 +1,29 @@
 import toast from 'react-hot-toast';
 import pptxgen from 'pptxgenjs';
 import { Slide } from '@/types/presentation';
-import { generateFileName, getContentPreset, getDividerPreset, getTitlePreset } from './utils';
+import {
+  generateFileName,
+  getContentPreset,
+  getCoverContentPreset,
+  getCoverTitlePreset,
+  getDividerPreset,
+  getTitlePreset,
+} from './utils';
 
 const generatePPT = (slides: Slide[]) => {
   const pres = new pptxgen();
 
-  slides.forEach(slide => {
+  slides.forEach((slide, index) => {
     const slot = pres.addSlide();
 
-    slot.addText(slide.title, getTitlePreset(pres.AlignV.middle));
-    slot.addText('', getDividerPreset(pres.ShapeType.line));
-    slot.addText(slide.content, getContentPreset(pres.AlignV.top));
+    if (index === 0) {
+      slot.addText(slide.title, getCoverTitlePreset(pres.AlignV.bottom));
+      slot.addText(slide.content, getCoverContentPreset(pres.AlignV.middle));
+    } else {
+      slot.addText(slide.title, getTitlePreset(pres.AlignV.middle));
+      slot.addText('', getDividerPreset(pres.ShapeType.line));
+      slot.addText(slide.content, getContentPreset(pres.AlignV.top));
+    }
   });
 
   try {
