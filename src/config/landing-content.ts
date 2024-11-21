@@ -1,4 +1,4 @@
-import { ContentSection, HeroHeader } from '@/types/landing';
+import { ContentSection, HeroHeader } from '@/types/config/landing';
 
 export const heroHeader: HeroHeader = {
   header: `손쉬운 프레젠테이션 제작 도구`,

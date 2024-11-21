@@ -1,4 +1,4 @@
-import { ResumeContents } from '@/types/resume-id-contents';
+import { ResumeContents } from '@/types/config/resume-id-contents';
 
 export const resumeContents: ResumeContents = {
   // 제목란 props

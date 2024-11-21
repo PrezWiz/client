@@ -34,6 +34,6 @@ export const articles = [
     subject: '국가 공인 자격증 검색 방법',
     text: '사용자가 소지한 국가기술자격증을 조회할 때 한국산업인력공단 홈페이지에서 검색 가능합니다.',
   },
-];
+] as const;
 
 export type Article = (typeof articles)[number];

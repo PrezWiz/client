@@ -1,4 +1,4 @@
-import { SiteConfig } from '@/types';
+import { SiteConfig } from '@/types/config';
 
 export const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || '';
 
