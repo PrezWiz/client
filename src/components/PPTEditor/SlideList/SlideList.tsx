@@ -14,18 +14,21 @@ const SlideList = ({ slides, activeSlide, deleteSlide, setActiveSlide }: SlideLi
   return (
     <>
       {slides.map((slide, index) => (
-        <button
+        <div
           key={index}
-          type="button"
-          className={`mb-2 block w-full cursor-pointer rounded border p-2 text-left ${
+          className={`mb-2 block w-full rounded border ${
             index === activeSlide ? 'border-blue-500 bg-blue-50 dark:bg-secondary' : 'border-gray-200'
           }`}
-          onClick={() => setActiveSlide(index)}
         >
-          <div className="flex items-center justify-between">
-            <span className="w-3/4 overflow-hidden text-ellipsis whitespace-nowrap text-sm" title={slide.title}>
+          <div className="flex h-10 items-center justify-between pr-2">
+            <button
+              type="button"
+              className="w-[calc(100%-24px)] overflow-hidden text-ellipsis whitespace-nowrap p-2.5 text-left text-sm"
+              title={slide.title}
+              onClick={() => setActiveSlide(index)}
+            >
               {slide.title}
-            </span>
+            </button>
             {index !== 0 && (
               <button
                 className="rounded-full p-1 hover:bg-gray-200"
@@ -38,7 +41,7 @@ const SlideList = ({ slides, activeSlide, deleteSlide, setActiveSlide }: SlideLi
               </button>
             )}
           </div>
-        </button>
+        </div>
       ))}
     </>
   );

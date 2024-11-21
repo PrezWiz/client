@@ -16,7 +16,7 @@ const SlideCard = ({ slideNumber, title, description, onEdit, onDelete }: ViewMo
       <div className="flex-1">
         <p className="mt-2 text-sm text-gray-500">Slide {slideNumber}</p>
         <h2 className="text-2xl font-bold">{title}</h2>
-        <p className="mt-2 text-gray-700">{description}</p>
+        <p className="mt-2 text-muted-foreground">{description}</p>
       </div>
       <div className="flex space-x-2">
         <button className="p-1 text-blue-500" onClick={onEdit}>
