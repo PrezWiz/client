@@ -32,7 +32,7 @@ const SlideViewer = ({
   };
 
   const onTransitionEnd = (swiper: SwiperType) => {
-    sliderRef.current?.swiper.slides[swiper.activeIndex].querySelector('input')?.focus();
+    sliderRef.current?.swiper.slides[swiper.activeIndex]?.querySelector('input')?.focus();
   };
 
   return (
