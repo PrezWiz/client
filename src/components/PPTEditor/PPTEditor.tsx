@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { generatePPT } from '@/libs/pptx';
 import { Slide as SlideType } from '@/types/presentation';
 import EditorToolbar from './EditorToolbar';
-import SlideList from './SlideList';
+import { SlideListContainer } from './SlideList';
 import SlideViewer from './SlideViewer';
 import type { Swiper as SwiperType } from 'swiper/types';
 
@@ -50,7 +50,7 @@ const PPTEditor = ({ slides: initialSlides, onPrev }: PPTEditorProps) => {
   }, [activeSlide]);
 
   return (
-    <div className="fixed inset-0 z-10 h-screen bg-gray-100">
+    <div className="fixed inset-0 z-10 h-screen bg-secondary dark:bg-background">
       <EditorToolbar onPrev={onPrev} />
       <div className="flex h-[calc(100%-3.5rem)] w-full gap-4 p-4">
         <SlideViewer
@@ -61,7 +61,7 @@ const PPTEditor = ({ slides: initialSlides, onPrev }: PPTEditorProps) => {
           handleTitleChange={handleTitleChange}
           handleContentChange={handleContentChange}
         />
-        <SlideList
+        <SlideListContainer
           slides={slides}
           activeSlide={activeSlide}
           addSlide={addSlide}
