@@ -9,6 +9,7 @@ export const PPT_TITLE_PRESET: pptxgen.TextPropsOptions = {
   h: '20%',
   bold: true,
   breakLine: true,
+  fontFace: 'Noto Sans KR',
   line: {
     width: 1,
     dashType: 'dash',
@@ -28,6 +29,7 @@ export const PPT_CONTENT_PRESET: pptxgen.TextPropsOptions = {
   h: '75%',
   w: '93%',
   color: '363636',
+  fontFace: 'Noto Sans KR',
   lineSpacing: 16 * 1.6,
   fontSize: 16,
 };

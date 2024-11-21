@@ -10,7 +10,7 @@ const generatePPT = (slides: Slide[]) => {
     const slot = pres.addSlide();
 
     slot.addText(slide.title, getTitlePreset(pres.AlignV.middle));
-    slot.addText('divider', getDividerPreset(pres.ShapeType.line));
+    slot.addText('', getDividerPreset(pres.ShapeType.line));
     slot.addText(slide.content, getContentPreset(pres.AlignV.top));
   });
 
