@@ -5,7 +5,7 @@ const queryKeys = createQueryKeyStore({
     login: null,
     register: null,
   },
-  slide: {
+  presentation: {
     slides: null,
     createOutlines: null,
     create: null,

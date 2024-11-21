@@ -4,7 +4,7 @@ import { type Dispatch, type SetStateAction, useRef } from 'react';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Swiper as SwiperType } from 'swiper/types';
-import { Slide } from '@/types/slide';
+import { Slide } from '@/types/presentation';
 
 type SlideViewerProps = {
   swiper: SwiperType | null;

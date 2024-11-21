@@ -1,7 +1,7 @@
 import { authApis } from './auth';
-import { slideApis } from './slide';
+import { presentationApis } from './presentation';
 
 export const apis = {
   auth: authApis,
-  slide: slideApis,
+  presentation: presentationApis,
 } as const;

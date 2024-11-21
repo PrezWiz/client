@@ -13,9 +13,9 @@ const TopicForm = ({ onNext }: TopicFormProps) => {
   const queryClient = useQueryClient();
 
   const { mutateAsync, isPending } = useMutation({
-    ...mutations.slide.createOutlines,
+    ...mutations.presentation.createOutlines,
     onSuccess: async data => {
-      await queryClient.setQueryData(mutations.slide.createOutlines.mutationKey, data);
+      await queryClient.setQueryData(mutations.presentation.createOutlines.mutationKey, data);
       onNext();
     },
   });

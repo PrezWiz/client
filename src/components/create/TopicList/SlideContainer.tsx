@@ -1,4 +1,4 @@
-import { Outline } from '@/types/slide';
+import { Outline } from '@/types/presentation';
 import { Slide } from './Slide';
 
 type SlideContainerProps = {

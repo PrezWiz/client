@@ -3,7 +3,7 @@ export const apiPaths = {
     login: '/login',
     register: '/member',
   },
-  slide: {
+  presentation: {
     slides: '/store',
     createOutlines: '/prez/prototype',
     create: '/prez/slides',

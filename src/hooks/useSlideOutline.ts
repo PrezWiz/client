@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import { mutations } from '@/queries';
-import { Outline } from '@/types/slide';
+import { Outline } from '@/types/presentation';
 
 const reorderOutlines = (outlines: Outline[]): Outline[] => {
   return outlines.map((outline, index) => ({
@@ -22,9 +22,9 @@ const useSlideOutline = (initialOutlines: Outline[], id: number) => {
   const router = useRouter();
 
   const { mutateAsync, isPending } = useMutation({
-    ...mutations.slide.create,
+    ...mutations.presentation.create,
     onSuccess: async data => {
-      await queryClient.setQueryData(mutations.slide.create.mutationKey, data);
+      await queryClient.setQueryData(mutations.presentation.create.mutationKey, data);
     },
   });
 

@@ -1,11 +1,11 @@
 import { authMutations } from './auth';
-import { slideMutations, slideQueries } from './slide';
+import { presentationMutations, presentationQueries } from './presentation';
 
 export const mutations = {
   auth: authMutations,
-  slide: slideMutations,
+  presentation: presentationMutations,
 } as const;
 
 export const queries = {
-  slide: slideQueries,
+  presentation: presentationQueries,
 } as const;

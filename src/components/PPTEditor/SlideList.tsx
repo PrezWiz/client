@@ -1,6 +1,6 @@
 import { Plus, Save, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Slide } from '@/types/slide';
+import { Slide } from '@/types/presentation';
 
 type SlideListProps = {
   slides: Slide[];

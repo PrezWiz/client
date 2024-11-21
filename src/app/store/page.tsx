@@ -20,7 +20,7 @@ const formatDate = (isoString: string) => {
 const TopicGrid = () => {
   //TODO : api type
   const { data: topicList = [], isError } = useSuspenseQuery({
-    ...queries.slide.slides,
+    ...queries.presentation.slides,
   });
 
   return (
