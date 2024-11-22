@@ -1,7 +1,7 @@
 import { Toaster } from 'react-hot-toast';
 import { Noto_Sans_KR } from 'next/font/google';
 import 'swiper/css';
-import { ErrorHandler } from '@/components/ErrorBoundary';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 import Footer from '@/components/layout/Footer';
 import Navbar from '@/components/layout/Navbar';
 import { metadataConfig, viewportConfig } from '@/constants/layout';
@@ -23,7 +23,7 @@ const RootLayout = ({ children }: StrictPropsWithChildren) => {
       <body className={`${noto_sans_kr.className} flex min-h-screen flex-col bg-background text-primary`}>
         <Providers>
           <Navbar />
-          <ErrorHandler>{children}</ErrorHandler>
+          <ErrorBoundary>{children}</ErrorBoundary>
           <Footer />
         </Providers>
         <Toaster />

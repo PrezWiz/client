@@ -3,7 +3,7 @@ import Loading from '@/components/common/Loading';
 import { StrictPropsWithChildren } from '@/types/common';
 import ApiErrorBoundary from './ApiErrorBoundary';
 
-const ErrorHandler = ({ children }: StrictPropsWithChildren) => {
+const ErrorBoundary = ({ children }: StrictPropsWithChildren) => {
   return (
     <ApiErrorBoundary>
       <Suspense fallback={<Loading />}>{children}</Suspense>
@@ -11,4 +11,4 @@ const ErrorHandler = ({ children }: StrictPropsWithChildren) => {
   );
 };
 
-export default ErrorHandler;
+export default ErrorBoundary;

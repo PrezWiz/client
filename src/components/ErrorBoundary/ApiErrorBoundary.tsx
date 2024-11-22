@@ -3,11 +3,10 @@
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
 import { ErrorBoundary } from '@suspensive/react';
 import { usePathname } from 'next/navigation';
+import { StrictPropsWithChildren } from '@/types/common';
 import ErrorBoundaryFallback from './ErrorBoundaryFallback';
 
-type Props = React.PropsWithChildren;
-
-const ApiErrorBoundary = ({ children }: Props) => {
+const ApiErrorBoundary = ({ children }: StrictPropsWithChildren) => {
   const pathname = usePathname();
 
   return (
