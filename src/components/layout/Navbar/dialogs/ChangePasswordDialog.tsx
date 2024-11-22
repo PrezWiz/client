@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import ChangePasswordForm from '@/components/auth/account/ChangePasswordForm';
-import BaseDialog, { BaseDialogProps } from '@/components/BaseDialog';
+import BaseDialog, { BaseDialogProps } from '@/components/common/BaseDialog';
 
 type ChangePasswordDialogProps = Pick<BaseDialogProps, 'open' | 'onOpenChange'>;
 

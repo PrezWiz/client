@@ -1,5 +1,5 @@
 import RegisterForm from '@/components/auth/register/RegisterForm';
-import BaseDialog from '@/components/BaseDialog';
+import BaseDialog from '@/components/common/BaseDialog';
 import { Button } from '@/components/ui/button';
 
 const RegisterDialog = () => {

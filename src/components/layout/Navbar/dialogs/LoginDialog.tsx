@@ -1,6 +1,6 @@
 import LoginForm from '@/components/auth/login/LoginForm';
 import SnsLoginForm from '@/components/auth/login/SnsLoginForm';
-import BaseDialog from '@/components/BaseDialog';
+import BaseDialog from '@/components/common/BaseDialog';
 import { Button } from '@/components/ui/button';
 
 const LoginDialog = () => {

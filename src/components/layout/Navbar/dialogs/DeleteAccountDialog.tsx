@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import DeleteAccountForm from '@/components/auth/account/DeleteAccountForm';
-import BaseDialog, { BaseDialogProps } from '@/components/BaseDialog';
+import BaseDialog, { BaseDialogProps } from '@/components/common/BaseDialog';
 
 type DeleteAccountDialogProps = Pick<BaseDialogProps, 'open' | 'onOpenChange'>;
 
