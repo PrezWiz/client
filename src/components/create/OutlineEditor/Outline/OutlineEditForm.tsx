@@ -3,13 +3,13 @@
 import { useState } from 'react';
 import { Save } from 'lucide-react';
 
-type EditModeProps = {
+type OutlineEditFormProps = {
   title: string;
   description: string;
   onSave: (title: string, description: string) => void;
 };
 
-const SlideEditForm = ({ title, description, onSave }: EditModeProps) => {
+const OutlineEditForm = ({ title, description, onSave }: OutlineEditFormProps) => {
   const [values, setValues] = useState<{ title: string; description: string }>({ title, description });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -42,4 +42,4 @@ const SlideEditForm = ({ title, description, onSave }: EditModeProps) => {
   );
 };
 
-export default SlideEditForm;
+export default OutlineEditForm;

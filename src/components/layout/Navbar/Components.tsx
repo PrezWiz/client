@@ -12,7 +12,7 @@ import { GuestMenu, MemberMenu, ThemeToggleMenu } from './menus';
 
 const Wrapper = ({ children }: StrictPropsWithChildren) => {
   return (
-    <header className="select-none justify-between px-4 py-5 md:flex md:items-center md:px-8 lg:max-w-7xl">
+    <header className="mx-auto w-full select-none justify-between px-4 py-5 md:flex md:items-center md:px-8 lg:max-w-7xl">
       {children}
     </header>
   );

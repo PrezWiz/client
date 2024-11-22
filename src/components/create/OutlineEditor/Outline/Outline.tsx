@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import SlideCard from './SlideCard';
-import SlideEditForm from './SlideEditForm';
+import OutlineCard from './OutlineCard';
+import OutlineEditForm from './OutlineEditForm';
 
-type SlideProps = {
+type OutlineProps = {
   slideNumber: number;
   title?: string;
   description?: string;
@@ -11,7 +11,7 @@ type SlideProps = {
   isEditing?: boolean;
 };
 
-const Slide = ({ slideNumber, title = '', description = '', onDelete, onEdit, isEditing = false }: SlideProps) => {
+const Outline = ({ slideNumber, title = '', description = '', onDelete, onEdit, isEditing = false }: OutlineProps) => {
   const [isEditingState, setIsEditing] = useState<boolean>(isEditing);
 
   const handleSave = (title: string, description: string) => {
@@ -22,9 +22,9 @@ const Slide = ({ slideNumber, title = '', description = '', onDelete, onEdit, is
   return (
     <div className="flex items-start justify-between rounded-md border p-4">
       {isEditingState ? (
-        <SlideEditForm title={title} description={description} onSave={handleSave} />
+        <OutlineEditForm title={title} description={description} onSave={handleSave} />
       ) : (
-        <SlideCard
+        <OutlineCard
           slideNumber={slideNumber}
           title={title}
           description={description}
@@ -36,4 +36,4 @@ const Slide = ({ slideNumber, title = '', description = '', onDelete, onEdit, is
   );
 };
 
-export default Slide;
+export default Outline;

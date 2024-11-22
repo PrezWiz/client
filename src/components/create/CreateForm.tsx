@@ -1,9 +1,9 @@
 'use client';
 
 import useFunnel from '@/hooks/useFunnel';
+import { OutlineEditor } from './OutlineEditor';
 import { SlideEditor } from './SlideEditor';
 import TopicForm from './TopicForm';
-import { TopicList } from './TopicList';
 
 const StepName = {
   WRITE_FORM: 'WRITE_FORM',
@@ -21,7 +21,7 @@ const CreateForm = () => {
         <TopicForm onNext={() => setStep(StepName.EDIT_OUTLINE)} />
       </Funnel.Step>
       <Funnel.Step name={StepName.EDIT_OUTLINE}>
-        <TopicList onNext={() => setStep(StepName.EDIT_SLIDES)} />
+        <OutlineEditor onNext={() => setStep(StepName.EDIT_SLIDES)} />
       </Funnel.Step>
       <Funnel.Step name={StepName.EDIT_SLIDES}>
         <SlideEditor onPrev={() => setStep(StepName.EDIT_OUTLINE)} onNext={() => setStep(StepName.COMPLETE)} />

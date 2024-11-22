@@ -10,7 +10,7 @@ type ViewModeProps = {
   onDelete: () => void;
 };
 
-const SlideCard = ({ slideNumber, title, description, onEdit, onDelete }: ViewModeProps) => {
+const OutlineCard = ({ slideNumber, title, description, onEdit, onDelete }: ViewModeProps) => {
   return (
     <>
       <div className="flex-1">
@@ -30,4 +30,4 @@ const SlideCard = ({ slideNumber, title, description, onEdit, onDelete }: ViewMo
   );
 };
 
-export default SlideCard;
+export default OutlineCard;

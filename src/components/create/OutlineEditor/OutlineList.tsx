@@ -1,17 +1,17 @@
-import { Outline } from '@/types/presentation';
-import { Slide } from './Slide';
+import { Outline as OutlineType } from '@/types/presentation';
+import { Outline } from './Outline';
 
-type SlideContainerProps = {
-  outlines: Outline[];
+type OutlineListProps = {
+  outlines: OutlineType[];
   onDelete: (slideNumber: number) => void;
   onEdit: (slideNumber: number, title: string, description: string) => void;
 };
 
-const SlideContainer = ({ outlines, onDelete, onEdit }: SlideContainerProps) => (
+const OutlineList = ({ outlines, onDelete, onEdit }: OutlineListProps) => (
   <>
     {outlines.map((outline, index) => (
       <div key={index} className="mb-4">
-        <Slide
+        <Outline
           slideNumber={outline.slide_number}
           title={outline.title}
           description={outline.description}
@@ -23,4 +23,4 @@ const SlideContainer = ({ outlines, onDelete, onEdit }: SlideContainerProps) => 
   </>
 );
 
-export default SlideContainer;
+export default OutlineList;

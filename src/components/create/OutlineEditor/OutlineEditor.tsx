@@ -1,17 +1,15 @@
 import LoadingComponent from '@/components/common/LoadingComponent';
-import SubmitButton from '@/components/create/SubmitButton';
 import { useCreationSlideQueries } from '@/hooks/useCreationSlideQueries';
 import useSlideOutline from '@/hooks/useSlideOutline';
-import AddSlideButton from './AddSlideButton';
-import { Slide } from './Slide';
-import SlideContainer from './SlideContainer';
-import SlideCreationLoading from './SlideCreationLoading';
+import Components from './Components';
+import { Outline } from './Outline';
+import OutlineList from './OutlineList';
 
-type TopicListProps = {
+type OutlineEditorProps = {
   onNext: () => void;
 };
 
-const TopicList = ({ onNext }: TopicListProps) => {
+const OutlineEditor = ({ onNext }: OutlineEditorProps) => {
   const { presentationId, outlines: initialOutlines } = useCreationSlideQueries();
 
   const {
@@ -32,17 +30,17 @@ const TopicList = ({ onNext }: TopicListProps) => {
   };
 
   return (
-    <LoadingComponent isLoading={isPending} fallback={<SlideCreationLoading />}>
+    <LoadingComponent isLoading={isPending} fallback={<Components.CreationLoading />}>
       <div className="space-y-8">
-        <SlideContainer outlines={outlines} onDelete={handleDeleteOutline} onEdit={handleEditOutline} />
+        <OutlineList outlines={outlines} onDelete={handleDeleteOutline} onEdit={handleEditOutline} />
         {isAdding && (
-          <Slide isEditing slideNumber={outlines.length + 1} onDelete={handleCancelAdd} onEdit={handleNewOutline} />
+          <Outline isEditing slideNumber={outlines.length + 1} onDelete={handleCancelAdd} onEdit={handleNewOutline} />
         )}
-        <AddSlideButton onClick={handleAddOutline} />
-        <SubmitButton onClick={handleNext} />
+        <Components.AddButton onClick={handleAddOutline} />
+        <Components.SubmitButton onClick={handleNext} />
       </div>
     </LoadingComponent>
   );
 };
 
-export default TopicList;
+export default OutlineEditor;
