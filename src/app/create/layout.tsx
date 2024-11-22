@@ -1,6 +1,7 @@
 import NotSupported from '@/components/common/NotSupported';
+import { StrictPropsWithChildren } from '@/types/common';
 
-const CreateLayout = ({ children }: { children: React.ReactNode }) => {
+const CreateLayout = ({ children }: StrictPropsWithChildren) => {
   return (
     <>
       <NotSupported />

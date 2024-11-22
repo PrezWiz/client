@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { QueryClientProvider as BaseQueryClientProvider, QueryClient, QueryClientConfig } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { StrictPropsWithChildren } from '@/types/common';
 
 const queryClientOption: QueryClientConfig = {
   defaultOptions: {
@@ -18,7 +19,7 @@ const queryClientOption: QueryClientConfig = {
   },
 };
 
-const QueryClientProvider = ({ children }: React.PropsWithChildren) => {
+const QueryClientProvider = ({ children }: StrictPropsWithChildren) => {
   const [queryClient] = useState(() => new QueryClient(queryClientOption));
 
   return (

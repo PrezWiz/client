@@ -2,8 +2,9 @@
 
 import { ThemeProvider as BaseThemeProvider } from 'next-themes';
 import { settings } from '@/config/settings';
+import { StrictPropsWithChildren } from '@/types/common';
 
-const ThemeProvider = ({ children }: React.PropsWithChildren) => {
+const ThemeProvider = ({ children }: StrictPropsWithChildren) => {
   const defaultTheme = settings.themeToggleEnabled ? 'system' : 'light';
 
   return (
