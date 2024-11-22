@@ -1,6 +1,6 @@
+import RegisterForm from '@/components/auth/register/RegisterForm';
 import BaseDialog from '@/components/BaseDialog';
 import { Button } from '@/components/ui/button';
-import RegisterForm from './RegisterForm';
 
 const RegisterDialog = () => {
   return (

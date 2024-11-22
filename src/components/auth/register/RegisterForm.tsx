@@ -9,7 +9,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input';
 import { mutations } from '@/queries';
 import { registerSchema } from '@/schemas/auth';
-import SuccessMessage from './SuccessMessage';
+import RegisterCompleteMessage from './RegisterCompleteMessage';
 import type { z } from 'zod';
 
 const defaultValues = {
@@ -39,7 +39,7 @@ const RegisterForm = () => {
   const { control, handleSubmit } = form;
 
   if (complete) {
-    return <SuccessMessage />;
+    return <RegisterCompleteMessage />;
   }
 
   return (

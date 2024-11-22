@@ -1,6 +1,6 @@
 import { Icons } from '@/components/common/Icons';
 
-const SocialLoginButton = () => {
+const SnsLoginForm = () => {
   return (
     <a
       href="/auth/kakao/callback"
@@ -12,4 +12,4 @@ const SocialLoginButton = () => {
   );
 };
 
-export default SocialLoginButton;
+export default SnsLoginForm;

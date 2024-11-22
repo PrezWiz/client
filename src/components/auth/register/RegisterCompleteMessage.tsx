@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { DialogClose } from '@/components/ui/dialog';
 
-const SuccessMessage = () => {
+const RegisterCompleteMessage = () => {
   return (
     <div className="gap-4 space-y-4 py-4">
       <div>계정이 생성되었습니다. 로그인을 진행해주세요</div>
@@ -14,4 +14,4 @@ const SuccessMessage = () => {
   );
 };
 
-export default SuccessMessage;
+export default RegisterCompleteMessage;

@@ -1,7 +1,7 @@
+import LoginForm from '@/components/auth/login/LoginForm';
+import SnsLoginForm from '@/components/auth/login/SnsLoginForm';
 import BaseDialog from '@/components/BaseDialog';
 import { Button } from '@/components/ui/button';
-import LoginForm from './LoginForm';
-import SocialLoginButton from './SocialLoginButton';
 
 const LoginDialog = () => {
   return (
@@ -15,7 +15,7 @@ const LoginDialog = () => {
       }
     >
       <LoginForm />
-      <SocialLoginButton />
+      <SnsLoginForm />
     </BaseDialog>
   );
 };
