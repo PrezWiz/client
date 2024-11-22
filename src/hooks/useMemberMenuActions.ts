@@ -5,12 +5,12 @@ import { redirect } from 'next/navigation';
 import { deleteSession } from '@/libs/auth/session';
 import { useSetIsLoggedInAtom } from '@/stores/auth';
 
-const useMemberActions = () => {
+const useMemberMenuActions = () => {
   const [changePasswordOpen, setChangePasswordOpen] = useState(false);
   const [deleteAccountOpen, setDeleteAccountOpen] = useState(false);
   const setIsLoggedIn = useSetIsLoggedInAtom();
 
-  const logout = () => {
+  const onLogout = () => {
     deleteSession();
     setIsLoggedIn(false);
     redirect('/');
@@ -21,8 +21,8 @@ const useMemberActions = () => {
     setChangePasswordOpen,
     deleteAccountOpen,
     setDeleteAccountOpen,
-    logout,
+    onLogout,
   };
 };
 
-export default useMemberActions;
+export default useMemberMenuActions;

@@ -2,12 +2,12 @@ import React from 'react';
 import { ChangePasswordDialog } from '@/components/layout/Navbar/dialogs';
 import DeleteAccountDialog from '@/components/layout/Navbar/dialogs/DeleteAccountDialog';
 import { DropdownMenu, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import useMemberActions from '@/hooks/useMemberActions';
+import useMemberMenuActions from '@/hooks/useMemberMenuActions';
 import Components from './Components';
 
 const MemberMenu = () => {
-  const { changePasswordOpen, setChangePasswordOpen, deleteAccountOpen, setDeleteAccountOpen, logout } =
-    useMemberActions();
+  const { changePasswordOpen, setChangePasswordOpen, deleteAccountOpen, setDeleteAccountOpen, onLogout } =
+    useMemberMenuActions();
 
   return (
     <>
@@ -18,7 +18,7 @@ const MemberMenu = () => {
         <Components.MenuItems
           onChangePassword={() => setChangePasswordOpen(true)}
           onDeleteAccount={() => setDeleteAccountOpen(true)}
-          onLogout={logout}
+          onLogout={onLogout}
         />
       </DropdownMenu>
       <ChangePasswordDialog open={changePasswordOpen} onOpenChange={setChangePasswordOpen} />

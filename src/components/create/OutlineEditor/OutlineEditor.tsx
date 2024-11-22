@@ -1,6 +1,6 @@
 import LoadingComponent from '@/components/common/LoadingComponent';
 import { useCreationSlideQueries } from '@/hooks/useCreationSlideQueries';
-import useSlideOutline from '@/hooks/useSlideOutline';
+import useSlideOutlineActions from '@/hooks/useSlideOutlineActions';
 import Components from './Components';
 import { Outline } from './Outline';
 import OutlineList from './OutlineList';
@@ -22,7 +22,7 @@ const OutlineEditor = ({ onNext }: OutlineEditorProps) => {
     handleNewOutline,
     handleSubmit,
     handleCancelAdd,
-  } = useSlideOutline(initialOutlines, presentationId!);
+  } = useSlideOutlineActions(initialOutlines, presentationId!);
 
   const handleNext = async () => {
     await handleSubmit();

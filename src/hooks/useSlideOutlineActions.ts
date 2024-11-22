@@ -14,7 +14,7 @@ const reorderOutlines = (outlines: Outline[]): Outline[] => {
   }));
 };
 
-const useSlideOutline = (initialOutlines: Outline[], id: number) => {
+const useSlideOutlineActions = (initialOutlines: Outline[], id: number) => {
   const queryClient = useQueryClient();
   const [outlines, setOutlines] = useState<Outline[]>(initialOutlines);
   const [isAdding, setIsAdding] = useState<boolean>(false);
@@ -90,4 +90,4 @@ const useSlideOutline = (initialOutlines: Outline[], id: number) => {
   };
 };
 
-export default useSlideOutline;
+export default useSlideOutlineActions;
