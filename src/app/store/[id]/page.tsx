@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
-import { useParams } from 'next/navigation'; // useParams 사용
-import UnauthorizedDialog from '@/components/auth/UnauthorizedDialog';
+import { useParams } from 'next/navigation';
 import HeadingText from '@/components/common/HeadingText';
 
 // JSON 데이터 타입 정의
@@ -47,10 +46,6 @@ const TopicDetail = () => {
 
     fetchTopic();
   }, [id, jwt]);
-
-  if (isError) {
-    return <UnauthorizedDialog />;
-  }
 
   if (!topic) {
     return <p>Loading...</p>;

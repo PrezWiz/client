@@ -4,10 +4,10 @@ import 'swiper/css';
 import { ErrorHandler } from '@/components/ErrorBoundary';
 import Footer from '@/components/layout/Footer';
 import Navbar from '@/components/layout/Navbar';
+import { metadataConfig, viewportConfig } from '@/constants/layout';
 import { Providers } from '@/contexts';
 import { StrictPropsWithChildren } from '@/types/common';
 import './globals.css';
-import { metadataConfig, viewportConfig } from './layout.config';
 
 const noto_sans_kr = Noto_Sans_KR({
   subsets: ['latin'],

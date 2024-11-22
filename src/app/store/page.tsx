@@ -2,7 +2,6 @@
 
 import { useSuspenseQuery } from '@tanstack/react-query';
 import Link from 'next/link';
-import UnauthorizedDialog from '@/components/auth/UnauthorizedDialog';
 import HeadingText from '@/components/common/HeadingText';
 import { queries } from '@/queries';
 
@@ -27,8 +26,6 @@ const TopicGrid = () => {
     <main className="container flex flex-col items-center py-8">
       <HeadingText subtext="주제를 선택해 주세요">주제 목록</HeadingText>
       <div className="mt-8 grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {isError && <UnauthorizedDialog />}
-
         {!isError &&
           topicList.map(topic => (
             <Link
