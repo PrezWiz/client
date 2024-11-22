@@ -1,28 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import useMobileMenuActions from '@/hooks/useMobileMenuActions';
 import { useIsLoggedInAtomValue } from '@/stores/auth';
 import Components from './Components';
 
 const Navbar = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { isMobileMenuOpen, handleMenuClose, handleToggleMobileMenu } = useMobileMenuActions();
   const isLoggedIn = useIsLoggedInAtomValue();
-
-  const handleMenuClose = async () => {
-    setIsMobileMenuOpen(false);
-  };
-
-  const handleToggleMobileMenu = () => {
-    setIsMobileMenuOpen(prev => !prev);
-  };
-
-  useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-  }, [isMobileMenuOpen]);
 
   return (
     <Components.Wrapper>

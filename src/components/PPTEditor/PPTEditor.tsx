@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { generatePPT } from '@/libs/pptx';
+import usePPTEditorActions from '@/hooks/usePPTEditorActions';
 import { Slide as SlideType } from '@/types/presentation';
 import EditorToolbar from './EditorToolbar';
 import { SlideListContainer } from './SlideList';
@@ -14,35 +14,18 @@ type PPTEditorProps = {
 };
 
 const PPTEditor = ({ slides: initialSlides, onPrev }: PPTEditorProps) => {
-  const [slides, setSlides] = useState(initialSlides);
-  const [activeSlide, setActiveSlide] = useState(0);
   const [swiper, setSwiper] = useState<SwiperType | null>(null);
 
-  const addSlide = () => {
-    const newSlide = {
-      id: slides.length + 1,
-      title: `슬라이드 ${slides.length + 1}`,
-      content: '새로운 내용',
-    };
-    setSlides([...slides, newSlide]);
-    setActiveSlide(slides.length);
-  };
-
-  const deleteSlide = (targetIndex: number) => {
-    setSlides(slides.filter((_, index) => index !== targetIndex));
-  };
-
-  const savePresentation = () => {
-    generatePPT(slides);
-  };
-
-  const handleTitleChange = (targetIndex: number, value: string) => {
-    setSlides(slides.map((slide, index) => (index === targetIndex ? { ...slide, title: value } : slide)));
-  };
-
-  const handleContentChange = (targetIndex: number, value: string) => {
-    setSlides(slides.map((slide, index) => (index === targetIndex ? { ...slide, content: value } : slide)));
-  };
+  const {
+    slides,
+    activeSlide,
+    setActiveSlide,
+    addSlide,
+    deleteSlide,
+    handleTitleChange,
+    handleContentChange,
+    savePresentation,
+  } = usePPTEditorActions(initialSlides);
 
   useEffect(() => {
     swiper?.slideTo(activeSlide);
