@@ -1,7 +1,6 @@
 import { Slide } from '@/types/presentation';
-import SlideButtons from './SlideButtons';
+import Components from './Components';
 import SlideList from './SlideList';
-import SlideListHeader from './SlideListHeader';
 
 type SlideListContainerProps = {
   slides: Slide[];
@@ -22,9 +21,9 @@ const SlideListContainer = ({
 }: SlideListContainerProps) => {
   return (
     <div className="h-full w-[18rem] flex-shrink-0 overflow-y-auto rounded-lg bg-background p-4 shadow-lg dark:border dark:bg-secondary">
-      <SlideListHeader addSlide={addSlide} />
+      <Components.Header addSlide={addSlide} />
       <SlideList slides={slides} activeSlide={activeSlide} deleteSlide={deleteSlide} setActiveSlide={setActiveSlide} />
-      <SlideButtons onSavePresentation={savePresentation} />
+      <Components.UtilityButtons onSavePresentation={savePresentation} />
     </div>
   );
 };

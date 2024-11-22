@@ -1,4 +1,4 @@
-import Slide from './Slide';
+import Components from './Components';
 
 type BasicSlideProps = {
   title: string;
@@ -9,14 +9,14 @@ type BasicSlideProps = {
 
 const BasicSlide = ({ title, description, handleTitleChange, handleDescriptionChange }: BasicSlideProps) => {
   return (
-    <Slide.Container>
+    <Components.Container>
       <div className="h-[20%]">
-        <Slide.Title value={title} className="border-b-2 border-gray-300" onChange={handleTitleChange} />
+        <Components.Title value={title} className="border-b-2 border-gray-300" onChange={handleTitleChange} />
       </div>
       <div className="h-[80%] pt-4">
-        <Slide.Description value={description} onChange={handleDescriptionChange} />
+        <Components.Description value={description} onChange={handleDescriptionChange} />
       </div>
-    </Slide.Container>
+    </Components.Container>
   );
 };
 

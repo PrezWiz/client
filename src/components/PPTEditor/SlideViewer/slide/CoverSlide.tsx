@@ -1,4 +1,4 @@
-import Slide from './Slide';
+import Components from './Components';
 
 type CoverSlideProps = {
   title: string;
@@ -9,14 +9,18 @@ type CoverSlideProps = {
 
 const CoverSlide = ({ title, description, handleTitleChange, handleDescriptionChange }: CoverSlideProps) => {
   return (
-    <Slide.Container>
+    <Components.Container>
       <div className="h-[65%]">
-        <Slide.Title value={title} className="text-center text-5xl" onChange={handleTitleChange} />
+        <Components.Title value={title} className="text-center text-5xl" onChange={handleTitleChange} />
       </div>
       <div className="h-[35%] pt-4">
-        <Slide.Description value={description} className="text-center text-lg" onChange={handleDescriptionChange} />
+        <Components.Description
+          value={description}
+          className="text-center text-lg"
+          onChange={handleDescriptionChange}
+        />
       </div>
-    </Slide.Container>
+    </Components.Container>
   );
 };
 

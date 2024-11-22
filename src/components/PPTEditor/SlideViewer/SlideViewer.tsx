@@ -2,11 +2,11 @@
 
 import { type Dispatch, type SetStateAction, useRef } from 'react';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Swiper as SwiperType } from 'swiper/types';
 import { Slide } from '@/types/presentation';
-import BasicSlide from './Slide/BasicSlide';
-import CoverSlide from './Slide/CoverSlide';
+import Components from './Components';
+import BasicSlide from './slide/BasicSlide';
+import CoverSlide from './slide/CoverSlide';
 
 type SlideViewerProps = {
   swiper: SwiperType | null;
@@ -38,21 +38,7 @@ const SlideViewer = ({
   return (
     <div className="w-[calc(100%-19rem)] flex-1">
       <div className="relative h-full w-full overflow-hidden rounded-lg bg-background p-4 shadow-lg dark:border dark:bg-secondary">
-        <button
-          type="button"
-          className="absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-full border border-foreground bg-background p-2 shadow-lg"
-          onClick={() => swiper?.slidePrev()}
-        >
-          <ChevronLeft className="h-6 w-6 stroke-foreground" />
-        </button>
-        <button
-          type="button"
-          className="absolute right-4 top-1/2 z-10 -translate-y-1/2 rounded-full border border-foreground bg-background p-2 shadow-lg"
-          onClick={() => swiper?.slideNext()}
-        >
-          <ChevronRight className="h-6 w-6 stroke-foreground" />
-        </button>
-
+        <Components.SwiperButton swiper={swiper} />
         <Swiper
           spaceBetween={25}
           className="h-full w-full"

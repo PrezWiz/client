@@ -43,10 +43,10 @@ const Description = ({ value, onChange, className }: DescriptionProps) => {
   );
 };
 
-const Slide = {
+const Components = {
   Container,
   Title,
   Description,
 };
 
-export default Slide;
+export default Components;

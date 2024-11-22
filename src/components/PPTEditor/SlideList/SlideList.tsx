@@ -1,7 +1,7 @@
 'use client';
 
-import { Trash2 } from 'lucide-react';
 import { Slide } from '@/types/presentation';
+import Components from './Components';
 
 type SlideListProps = {
   slides: Slide[];
@@ -21,25 +21,8 @@ const SlideList = ({ slides, activeSlide, deleteSlide, setActiveSlide }: SlideLi
           }`}
         >
           <div className="flex h-10 items-center justify-between pr-2">
-            <button
-              type="button"
-              className="w-[calc(100%-24px)] overflow-hidden text-ellipsis whitespace-nowrap p-2.5 text-left text-sm"
-              title={slide.title}
-              onClick={() => setActiveSlide(index)}
-            >
-              {slide.title}
-            </button>
-            {index !== 0 && (
-              <button
-                className="rounded-full p-1 hover:bg-gray-200"
-                onClick={e => {
-                  e.stopPropagation();
-                  deleteSlide(index);
-                }}
-              >
-                <Trash2 className="h-4 w-4 text-gray-500" />
-              </button>
-            )}
+            <Components.SlideButton title={slide.title} onClick={() => setActiveSlide(index)} />
+            {index !== 0 && <Components.DeleteButton onDelete={() => deleteSlide(index)} />}
           </div>
         </div>
       ))}
