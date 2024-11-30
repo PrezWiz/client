@@ -1,11 +1,10 @@
 import { apiPaths } from '@/constants/apis';
 import { extractAxiosData, privateAxios } from '@/libs/baseAxios';
-import { ApiResponse } from '@/types/apis';
-import { CreateOutlinesResponse, CreateSlidesResponse, Outline } from '@/types/presentation';
+import { CreateOutlinesResponse, CreateSlidesResponse, OutlineType, SlidesResponse } from '@/types/presentation';
 
 export const presentationApis = {
   slides: async () => {
-    const response = await extractAxiosData<ApiResponse>(privateAxios.get(apiPaths.presentation.slides));
+    const response = await extractAxiosData<SlidesResponse>(privateAxios.get(apiPaths.presentation.slides));
 
     return response;
   },
@@ -16,9 +15,9 @@ export const presentationApis = {
 
     return response;
   },
-  create: async ({ id, outlines }: { id: number; outlines: Outline[] }) => {
+  create: async ({ id, outlines }: { id: number; outlines: OutlineType[] }) => {
     const response = await extractAxiosData<CreateSlidesResponse>(
-      privateAxios.post(`${apiPaths.presentation.create}/${id}`, { slides: outlines })
+      privateAxios.post(`${apiPaths.presentation.create}/${id}`, { outlines })
     );
 
     return response;

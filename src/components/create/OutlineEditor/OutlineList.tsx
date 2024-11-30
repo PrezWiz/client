@@ -1,4 +1,4 @@
-import { Outline as OutlineType } from '@/types/presentation';
+import { OutlineType } from '@/types/presentation';
 import { Outline } from './Outline';
 
 type OutlineListProps = {
@@ -12,11 +12,13 @@ const OutlineList = ({ outlines, onDelete, onEdit }: OutlineListProps) => (
     {outlines.map((outline, index) => (
       <div key={index} className="mb-4">
         <Outline
-          slideNumber={outline.slide_number}
+          outlineNumber={outline.outline_number}
           title={outline.title}
           description={outline.description}
-          onDelete={() => onDelete(outline.slide_number)}
-          onEdit={(updatedTitle, updatedDescription) => onEdit(outline.slide_number, updatedTitle, updatedDescription)}
+          onDelete={() => onDelete(outline.outline_number)}
+          onEdit={(updatedTitle, updatedDescription) =>
+            onEdit(outline.outline_number, updatedTitle, updatedDescription)
+          }
         />
       </div>
     ))}

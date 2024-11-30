@@ -5,18 +5,18 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import { mutations } from '@/queries';
-import { Outline } from '@/types/presentation';
+import { OutlineType } from '@/types/presentation';
 
-const reorderOutlines = (outlines: Outline[]): Outline[] => {
+const reorderOutlines = (outlines: OutlineType[]): OutlineType[] => {
   return outlines.map((outline, index) => ({
     ...outline,
     slide_number: index + 1,
   }));
 };
 
-const useSlideOutlineActions = (initialOutlines: Outline[], id: number) => {
+const useSlideOutlineActions = (initialOutlines: OutlineType[], id: number) => {
   const queryClient = useQueryClient();
-  const [outlines, setOutlines] = useState<Outline[]>(initialOutlines);
+  const [outlines, setOutlines] = useState<OutlineType[]>(initialOutlines);
   const [isAdding, setIsAdding] = useState<boolean>(false);
 
   const router = useRouter();
@@ -28,15 +28,15 @@ const useSlideOutlineActions = (initialOutlines: Outline[], id: number) => {
     },
   });
 
-  const handleDeleteOutline = (slideNumber: number) => {
-    const updatedOutlines = outlines.filter(outline => outline.slide_number !== slideNumber);
+  const handleDeleteOutline = (outlineNumber: number) => {
+    const updatedOutlines = outlines.filter(outline => outline.outline_number !== outlineNumber);
 
     setOutlines(reorderOutlines(updatedOutlines));
   };
 
-  const handleEditOutline = (slideNumber: number, title: string, description: string) => {
+  const handleEditOutline = (outlineNumber: number, title: string, description: string) => {
     const updatedOutlines = outlines.map(outline => {
-      if (outline.slide_number === slideNumber) {
+      if (outline.outline_number === outlineNumber) {
         return {
           ...outline,
           title,
@@ -57,7 +57,7 @@ const useSlideOutlineActions = (initialOutlines: Outline[], id: number) => {
     const newOutline = {
       title,
       description,
-      slide_number: outlines.length + 1,
+      outline_number: outlines.length + 1,
     };
     setOutlines([...outlines, newOutline]);
     setIsAdding(false);

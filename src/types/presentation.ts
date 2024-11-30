@@ -1,23 +1,33 @@
-export interface Outline {
+export interface OutlineType {
   title: string;
   description: string;
-  slide_number: number;
+  outline_number: number;
 }
 
 export interface OutlinesResponse {
-  slides: Outline[];
+  slides: OutlineType[];
 }
 
 export interface CreateOutlinesResponse {
-  presentationId: number;
-  prototypesDto: { slides: Outline[] };
+  id: number;
+  outlines: OutlineType[];
 }
 
-export interface Slide {
+export interface SlideType {
   title: string;
   content: string;
 }
 
 export interface CreateSlidesResponse {
-  slides: Slide[];
+  slides: SlideType[];
+}
+
+export interface PresentationType {
+  id: number;
+  topic: string;
+  createdAt: string;
+}
+
+export interface SlidesResponse {
+  presentations: PresentationType[];
 }

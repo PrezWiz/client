@@ -3,18 +3,18 @@
 import { Edit, Trash } from 'lucide-react';
 
 type ViewModeProps = {
-  slideNumber: number;
+  outlineNumber: number;
   title: string;
   description: string;
   onEdit: () => void;
   onDelete: () => void;
 };
 
-const OutlineCard = ({ slideNumber, title, description, onEdit, onDelete }: ViewModeProps) => {
+const OutlineCard = ({ outlineNumber, title, description, onEdit, onDelete }: ViewModeProps) => {
   return (
     <>
       <div className="flex-1">
-        <p className="mt-2 text-sm text-gray-500">Slide {slideNumber}</p>
+        <p className="mt-2 text-sm text-gray-500">Slide {outlineNumber}</p>
         <h2 className="text-2xl font-bold">{title}</h2>
         <p className="mt-2 text-muted-foreground">{description}</p>
       </div>

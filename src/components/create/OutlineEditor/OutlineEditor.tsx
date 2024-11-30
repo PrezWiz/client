@@ -10,7 +10,7 @@ type OutlineEditorProps = {
 };
 
 const OutlineEditor = ({ onNext }: OutlineEditorProps) => {
-  const { presentationId, outlines: initialOutlines } = useCreationSlideQueries();
+  const { id, outlines: initialOutlines } = useCreationSlideQueries();
 
   const {
     outlines,
@@ -22,7 +22,7 @@ const OutlineEditor = ({ onNext }: OutlineEditorProps) => {
     handleNewOutline,
     handleSubmit,
     handleCancelAdd,
-  } = useSlideOutlineActions(initialOutlines, presentationId!);
+  } = useSlideOutlineActions(initialOutlines, id!);
 
   const handleNext = async () => {
     await handleSubmit();
@@ -34,7 +34,7 @@ const OutlineEditor = ({ onNext }: OutlineEditorProps) => {
       <div className="space-y-8">
         <OutlineList outlines={outlines} onDelete={handleDeleteOutline} onEdit={handleEditOutline} />
         {isAdding && (
-          <Outline isEditing slideNumber={outlines.length + 1} onDelete={handleCancelAdd} onEdit={handleNewOutline} />
+          <Outline isEditing outlineNumber={outlines.length + 1} onDelete={handleCancelAdd} onEdit={handleNewOutline} />
         )}
         <Components.AddButton onClick={handleAddOutline} />
         <Components.SubmitButton onClick={handleNext} />

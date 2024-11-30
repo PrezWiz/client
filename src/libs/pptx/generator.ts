@@ -1,6 +1,6 @@
 import toast from 'react-hot-toast';
 import pptxgen from 'pptxgenjs';
-import { Slide } from '@/types/presentation';
+import { SlideType } from '@/types/presentation';
 import {
   generateFileName,
   getContentPreset,
@@ -10,7 +10,7 @@ import {
   getTitlePreset,
 } from './utils';
 
-const generatePPT = (slides: Slide[]) => {
+const generatePPT = (slides: SlideType[]) => {
   const pres = new pptxgen();
 
   slides.forEach((slide, index) => {

@@ -3,7 +3,7 @@ import OutlineCard from './OutlineCard';
 import OutlineEditForm from './OutlineEditForm';
 
 type OutlineProps = {
-  slideNumber: number;
+  outlineNumber: number;
   title?: string;
   description?: string;
   onDelete: () => void;
@@ -11,7 +11,14 @@ type OutlineProps = {
   isEditing?: boolean;
 };
 
-const Outline = ({ slideNumber, title = '', description = '', onDelete, onEdit, isEditing = false }: OutlineProps) => {
+const Outline = ({
+  outlineNumber,
+  title = '',
+  description = '',
+  onDelete,
+  onEdit,
+  isEditing = false,
+}: OutlineProps) => {
   const [isEditingState, setIsEditing] = useState<boolean>(isEditing);
 
   const handleSave = (title: string, description: string) => {
@@ -25,7 +32,7 @@ const Outline = ({ slideNumber, title = '', description = '', onDelete, onEdit, 
         <OutlineEditForm title={title} description={description} onSave={handleSave} />
       ) : (
         <OutlineCard
-          slideNumber={slideNumber}
+          outlineNumber={outlineNumber}
           title={title}
           description={description}
           onEdit={() => setIsEditing(true)}

@@ -7,7 +7,7 @@ type SlideEditorProps = {
 };
 
 const SlideEditor = ({ onPrev, onNext }: SlideEditorProps) => {
-  const { presentationId, slides = [] } = useCreationSlideQueries();
+  const { id, slides = [] } = useCreationSlideQueries();
 
   if (!slides.length) return null;
 

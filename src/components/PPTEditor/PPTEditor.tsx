@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import usePPTEditorActions from '@/hooks/usePPTEditorActions';
-import { Slide as SlideType } from '@/types/presentation';
+import { SlideType } from '@/types/presentation';
 import EditorToolbar from './EditorToolbar';
 import { SlideListContainer } from './SlideList';
 import SlideViewer from './SlideViewer/SlideViewer';

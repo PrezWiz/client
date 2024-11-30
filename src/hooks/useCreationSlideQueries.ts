@@ -7,10 +7,10 @@ import { CreateOutlinesResponse, CreateSlidesResponse } from '@/types/presentati
 export const useCreationSlideQueries = () => {
   const queryClient = useQueryClient();
 
-  const { presentationId, prototypesDto: { slides: outlines } = { slides: [] } } =
+  const { id, outlines = [] } =
     queryClient.getQueryData<CreateOutlinesResponse>(mutations.presentation.createOutlines.mutationKey) ?? {};
 
   const { slides } = queryClient.getQueryData<CreateSlidesResponse>(mutations.presentation.create.mutationKey) ?? {};
 
-  return { presentationId, outlines, slides };
+  return { id, outlines, slides };
 };

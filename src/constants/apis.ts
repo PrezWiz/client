@@ -5,8 +5,8 @@ export const apiPaths = {
   },
   presentation: {
     slides: '/store',
-    createOutlines: '/prez/prototype',
-    create: '/prez/slides',
+    createOutlines: '/slide-outlines',
+    create: '/slides',
   },
   contact: {
     sendMessage: '/contact',

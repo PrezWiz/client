@@ -1,6 +1,6 @@
 import { apis } from '@/apis';
 import { queryKeys } from '@/libs/queryKeys';
-import { Outline } from '@/types/presentation';
+import { OutlineType } from '@/types/presentation';
 
 export const presentationMutations = {
   createOutlines: {
@@ -9,6 +9,7 @@ export const presentationMutations = {
   },
   create: {
     mutationKey: queryKeys.presentation.create.queryKey,
-    mutationFn: ({ id, outlines }: { id: number; outlines: Outline[] }) => apis.presentation.create({ id, outlines }),
+    mutationFn: ({ id, outlines }: { id: number; outlines: OutlineType[] }) =>
+      apis.presentation.create({ id, outlines }),
   },
 } as const;

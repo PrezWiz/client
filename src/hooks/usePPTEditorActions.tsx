@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { generatePPT } from '@/libs/pptx';
-import { Slide as SlideType } from '@/types/presentation';
+import { SlideType } from '@/types/presentation';
 
 const usePPTEditorActions = (initialSlides: SlideType[]) => {
   const [slides, setSlides] = useState(initialSlides);
