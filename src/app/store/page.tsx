@@ -4,12 +4,14 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import HeadingText from '@/components/common/HeadingText';
 import StoreCard from '@/components/store/StoreCard';
 import { queries } from '@/queries';
+import { sortByDateDesc } from '@/utils/time';
 
 const TopicGrid = () => {
   const {
     data: { presentations },
   } = useSuspenseQuery({
     ...queries.presentation.slides,
+    select: ({ presentations }) => ({ presentations: sortByDateDesc(presentations) }),
   });
 
   return (

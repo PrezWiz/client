@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
-import { mutations } from '@/queries';
+import { mutations, queries } from '@/queries';
 import { SlideType } from '@/types/presentation';
 
 type UsePPTEditorActionsProps = {
@@ -16,10 +16,12 @@ type UsePPTEditorActionsProps = {
 const usePPTEditorActions = ({ initialSlides, id, setActiveIndex }: UsePPTEditorActionsProps) => {
   const [slides, setSlides] = useState(initialSlides);
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const { mutateAsync } = useMutation({
     ...mutations.presentation.update,
-    onSuccess: () => {
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: queries.presentation.slides.queryKey });
       toast.success('프레젠테이션이 저장되었어요.');
       router.push(`/store/${id}`);
     },

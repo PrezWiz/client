@@ -19,23 +19,23 @@ type StoreCardProps = {
 const StoreCard = ({ id, topic, createdAt }: StoreCardProps) => {
   return (
     <Link href={`/store/${id}`}>
-      <Card className="group relative w-full overflow-hidden rounded-lg border border-zinc-200 bg-white transition-all duration-200 hover:shadow-lg">
+      <Card className="group relative w-full overflow-hidden rounded-lg border border-border bg-card transition-all duration-200 hover:shadow-lg dark:hover:shadow-zinc-900">
         <CardHeader className="p-5">
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-3">
-              <div className="flex-shrink-0 rounded-md bg-zinc-50 p-2">
-                <FileText className="h-5 w-5 text-zinc-600" />
+              <div className="flex-shrink-0 rounded-md bg-muted p-2">
+                <FileText className="h-5 w-5 text-muted-foreground" />
               </div>
-              <CardTitle className="line-clamp-1 flex-1 text-lg font-medium text-zinc-800">{topic}</CardTitle>
+              <CardTitle className="line-clamp-1 flex-1 text-lg font-medium text-card-foreground">{topic}</CardTitle>
             </div>
 
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2 text-sm text-zinc-500">
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Calendar className="h-4 w-4" />
                 <CardDescription>{formatDate(createdAt)}</CardDescription>
               </div>
 
-              <div className="flex items-center gap-1 text-sm font-medium text-zinc-600">
+              <div className="flex items-center gap-1 text-sm font-medium text-muted-foreground">
                 자세히 보기
                 <ChevronRight className="h-4 w-4 transform transition-transform group-hover:translate-x-1" />
               </div>
