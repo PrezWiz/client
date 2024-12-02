@@ -1,12 +1,25 @@
 'use client';
 
 import { useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 import { generatePPT } from '@/libs/pptx';
+import { mutations } from '@/queries';
 import { SlideType } from '@/types/presentation';
 
-const usePPTEditorActions = (initialSlides: SlideType[]) => {
+type UsePPTEditorActionsProps = {
+  initialSlides: SlideType[];
+  id: number;
+};
+
+const usePPTEditorActions = ({ initialSlides, id }: UsePPTEditorActionsProps) => {
   const [slides, setSlides] = useState(initialSlides);
   const [activeSlide, setActiveSlide] = useState(0);
+  const router = useRouter();
+
+  const { mutateAsync } = useMutation({
+    ...mutations.presentation.update,
+  });
 
   const addSlide = () => {
     const newSlide = {
@@ -34,8 +47,10 @@ const usePPTEditorActions = (initialSlides: SlideType[]) => {
     setSlides(prev => prev.map((slide, index) => (index === targetIndex ? { ...slide, content: value } : slide)));
   };
 
-  const savePresentation = () => {
+  const savePresentation = async () => {
+    await mutateAsync({ id, slides });
     generatePPT(slides);
+    router.push(`/store/${id}`);
   };
 
   return {

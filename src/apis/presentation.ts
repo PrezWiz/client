@@ -1,6 +1,13 @@
 import { apiPaths } from '@/constants/apis';
 import { extractAxiosData, privateAxios } from '@/libs/baseAxios';
-import { CreateOutlinesResponse, CreateSlidesResponse, OutlineType, SlidesResponse } from '@/types/presentation';
+import {
+  CreateOutlinesResponse,
+  CreateSlidesResponse,
+  OutlineType,
+  SlideType,
+  SlidesResponse,
+  UpdateSlidesResponse,
+} from '@/types/presentation';
 
 export const presentationApis = {
   slides: async () => {
@@ -18,6 +25,13 @@ export const presentationApis = {
   create: async ({ id, outlines }: { id: number; outlines: OutlineType[] }) => {
     const response = await extractAxiosData<CreateSlidesResponse>(
       privateAxios.post(`${apiPaths.presentation.create}/${id}`, { outlines })
+    );
+
+    return response;
+  },
+  update: async ({ id, slides }: { id: number; slides: SlideType[] }) => {
+    const response = await extractAxiosData<UpdateSlidesResponse>(
+      privateAxios.put(`${apiPaths.presentation.update}/${id}`, { slides })
     );
 
     return response;

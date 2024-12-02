@@ -10,10 +10,11 @@ import type { Swiper as SwiperType } from 'swiper/types';
 
 type PPTEditorProps = {
   slides: SlideType[];
+  id: number;
   onPrev?: () => void;
 };
 
-const PPTEditor = ({ slides: initialSlides, onPrev }: PPTEditorProps) => {
+const PPTEditor = ({ slides: initialSlides, id, onPrev }: PPTEditorProps) => {
   const [swiper, setSwiper] = useState<SwiperType | null>(null);
 
   const {
@@ -25,7 +26,7 @@ const PPTEditor = ({ slides: initialSlides, onPrev }: PPTEditorProps) => {
     handleTitleChange,
     handleContentChange,
     savePresentation,
-  } = usePPTEditorActions(initialSlides);
+  } = usePPTEditorActions({ initialSlides, id });
 
   useEffect(() => {
     swiper?.slideTo(activeSlide);

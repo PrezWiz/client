@@ -22,6 +22,10 @@ export interface CreateSlidesResponse {
   slides: SlideType[];
 }
 
+export interface UpdateSlidesResponse {
+  slides: SlideType[];
+}
+
 export interface PresentationType {
   id: number;
   topic: string;

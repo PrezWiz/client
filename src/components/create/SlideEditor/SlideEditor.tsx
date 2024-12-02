@@ -13,7 +13,7 @@ const SlideEditor = ({ onPrev, onNext }: SlideEditorProps) => {
 
   return (
     <>
-      <PPTEditor slides={slides} onPrev={onPrev} />
+      <PPTEditor slides={slides} id={id} onPrev={onPrev} />
     </>
   );
 };
