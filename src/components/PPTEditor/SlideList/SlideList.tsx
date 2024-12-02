@@ -1,10 +1,10 @@
 'use client';
 
-import { Slide } from '@/types/presentation';
+import { SlideType } from '@/types/presentation';
 import Components from './Components';
 
 type SlideListProps = {
-  slides: Slide[];
+  slides: SlideType[];
   activeSlide: number;
   deleteSlide: (id: number) => void;
   setActiveSlide: (slide: number) => void;

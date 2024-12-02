@@ -4,6 +4,7 @@ import {
   CreateOutlinesResponse,
   CreateSlidesResponse,
   OutlineType,
+  SlideResponse,
   SlideType,
   SlidesResponse,
   UpdateSlidesResponse,
@@ -12,6 +13,11 @@ import {
 export const presentationApis = {
   slides: async () => {
     const response = await extractAxiosData<SlidesResponse>(privateAxios.get(apiPaths.presentation.slides));
+
+    return response;
+  },
+  slide: async (id: number) => {
+    const response = await extractAxiosData<SlideResponse>(privateAxios.get(`${apiPaths.presentation.slide}/${id}`));
 
     return response;
   },

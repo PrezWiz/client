@@ -10,11 +10,11 @@ import { SlideType } from '@/types/presentation';
 type UsePPTEditorActionsProps = {
   initialSlides: SlideType[];
   id: number;
+  setActiveIndex: (index: number) => void;
 };
 
-const usePPTEditorActions = ({ initialSlides, id }: UsePPTEditorActionsProps) => {
+const usePPTEditorActions = ({ initialSlides, id, setActiveIndex }: UsePPTEditorActionsProps) => {
   const [slides, setSlides] = useState(initialSlides);
-  const [activeSlide, setActiveSlide] = useState(0);
   const router = useRouter();
 
   const { mutateAsync } = useMutation({
@@ -29,7 +29,7 @@ const usePPTEditorActions = ({ initialSlides, id }: UsePPTEditorActionsProps) =>
     };
     setSlides(prev => {
       const updatedSlides = [...prev, newSlide];
-      setActiveSlide(updatedSlides.length - 1);
+      setActiveIndex(updatedSlides.length - 1);
 
       return updatedSlides;
     });
@@ -55,8 +55,6 @@ const usePPTEditorActions = ({ initialSlides, id }: UsePPTEditorActionsProps) =>
 
   return {
     slides,
-    activeSlide,
-    setActiveSlide,
     addSlide,
     deleteSlide,
     handleTitleChange,

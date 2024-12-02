@@ -35,3 +35,7 @@ export interface PresentationType {
 export interface SlidesResponse {
   presentations: PresentationType[];
 }
+
+export interface SlideResponse {
+  slides: SlideType[];
+}

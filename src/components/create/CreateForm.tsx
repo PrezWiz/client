@@ -9,7 +9,6 @@ const StepName = {
   WRITE_FORM: 'WRITE_FORM',
   EDIT_OUTLINE: 'EDIT_OUTLINE',
   EDIT_SLIDES: 'EDIT_SLIDES',
-  COMPLETE: 'COMPLETE',
 } as const;
 
 const CreateForm = () => {
@@ -24,7 +23,7 @@ const CreateForm = () => {
         <OutlineEditor onNext={() => setStep(StepName.EDIT_SLIDES)} />
       </Funnel.Step>
       <Funnel.Step name={StepName.EDIT_SLIDES}>
-        <SlideEditor onPrev={() => setStep(StepName.EDIT_OUTLINE)} onNext={() => setStep(StepName.COMPLETE)} />
+        <SlideEditor onPrev={() => setStep(StepName.EDIT_OUTLINE)} />
       </Funnel.Step>
     </Funnel>
   );

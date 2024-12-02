@@ -1,141 +1,46 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
 import HeadingText from '@/components/common/HeadingText';
+import { SlideViewer } from '@/components/SlideViewer';
+import useSwiper from '@/hooks/useSwiper';
+import { generatePPT } from '@/libs/pptx';
+import { queries } from '@/queries';
 
-// JSON 데이터 타입 정의
-interface Topic {
-  id: number;
-  topic: string;
-  createdAt: string;
-}
-
+// TODO: suspense 처리
 const TopicDetail = () => {
-  const { id } = useParams(); // 동적 라우트 파라미터 추출
-  const [topic, setTopic] = useState<Topic | null>(null);
-  const [isError, setIsError] = useState<boolean>(false);
-  const jwt = Cookies.get('authorization');
+  const { id } = useParams();
+  const { activeIndex, handleSlideChange, swiper, setSwiper } = useSwiper();
 
-  // 서버에서 데이터 가져오기
-  useEffect(() => {
-    if (!id) return; // id가 없으면 아무 작업도 하지 않음
+  const {
+    data: { slides },
+  } = useSuspenseQuery({
+    ...queries.presentation.slide,
+    queryFn: () => queries.presentation.slide.queryFn(Number(id)),
+  });
 
-    const fetchTopic = async () => {
-      try {
-        const response = await fetch(`/api/store/${id}`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${jwt}`,
-          },
-        });
-
-        if (response.status === 200) {
-          const data = await response.json();
-          setTopic(data);
-        } else {
-          setIsError(true);
-        }
-      } catch (error) {
-        console.error('Error fetching topic:', error);
-        setIsError(true);
-      }
-    };
-
-    fetchTopic();
-  }, [id, jwt]);
-
-  if (!topic) {
-    return <p>Loading...</p>;
-  }
-
-  // 날짜 형식 변환 함수 (YYYY-MM-DD)
-  const formatDate = (isoString: string) => {
-    const date = new Date(isoString);
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
-    return `${year}-${month}-${day}`;
+  const handleDownloadPPT = () => {
+    generatePPT(slides);
   };
 
-  // 다운로드 버튼 클릭 이벤트
-  const downloadPPT = async () => {
-    try {
-      const response = await fetch(`/api/store/${id}/slide`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${jwt}`, // 필요한 경우 JWT 토큰 포함
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to download PPT');
-      }
-
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `slide_${topic.topic}.pptx`; // 파일명 지정
-      document.body.appendChild(a);
-      a.click();
-
-      // 메모리 해제
-      a.remove();
-      window.URL.revokeObjectURL(url);
-    } catch (error) {
-      console.error('Error downloading PPT:', error);
-      alert('PPT 다운로드에 실패했습니다.');
-    }
-  };
-
-  const downloadScript = async () => {
-    try {
-      const response = await fetch(`/api/store/${id}/script`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${jwt}`, // JWT 토큰 전달
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to download script');
-      }
-
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `script_${topic.topic}.txt`; // 파일명 지정
-      document.body.appendChild(a);
-      a.click();
-
-      // 메모리 해제
-      a.remove();
-      window.URL.revokeObjectURL(url);
-    } catch (error) {
-      console.error('Error downloading script:', error);
-      alert('Script 다운로드에 실패했습니다.');
-    }
-  };
+  // TODO: SlideViewer 완성형 컴포넌트로 변경
 
   return (
     <main className="container flex flex-col items-center py-8">
-      <HeadingText>{topic.topic}</HeadingText>
-      <p className="text-gray-500">작성일: {formatDate(topic.createdAt)}</p>
-
+      <HeadingText>{slides[0].title}</HeadingText>
+      <SlideViewer readOnly slides={slides} swiper={swiper} setSwiper={setSwiper} onSlideChange={handleSlideChange} />
+      <div className="mt-4 text-sm text-muted-foreground">
+        {activeIndex + 1} / {slides.length}
+      </div>
       <div className="mt-8 flex gap-4">
-        <button className="rounded bg-blue-500 px-4 py-2 text-white transition hover:bg-blue-600" onClick={downloadPPT}>
+        <button
+          className="rounded bg-blue-500 px-4 py-2 text-white transition hover:bg-blue-600"
+          onClick={handleDownloadPPT}
+        >
           Download PPT
         </button>
-        <button
-          className="rounded bg-green-500 px-4 py-2 text-white transition hover:bg-green-600"
-          onClick={downloadScript}
-        >
+        <button className="rounded bg-green-500 px-4 py-2 text-white transition hover:bg-green-600">
           Download Script
         </button>
       </div>

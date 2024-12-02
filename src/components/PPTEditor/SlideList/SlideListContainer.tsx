@@ -1,9 +1,9 @@
-import { Slide } from '@/types/presentation';
+import { SlideType } from '@/types/presentation';
 import Components from './Components';
 import SlideList from './SlideList';
 
 type SlideListContainerProps = {
-  slides: Slide[];
+  slides: SlideType[];
   activeSlide: number;
   addSlide: () => void;
   deleteSlide: (id: number) => void;

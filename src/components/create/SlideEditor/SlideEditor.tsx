@@ -3,13 +3,12 @@ import { useCreationSlideQueries } from '@/hooks/useCreationSlideQueries';
 
 type SlideEditorProps = {
   onPrev?: () => void;
-  onNext?: () => void;
 };
 
-const SlideEditor = ({ onPrev, onNext }: SlideEditorProps) => {
+const SlideEditor = ({ onPrev }: SlideEditorProps) => {
   const { id, slides = [] } = useCreationSlideQueries();
 
-  if (!slides.length) return null;
+  if (!slides.length || !id) return null;
 
   return (
     <>
