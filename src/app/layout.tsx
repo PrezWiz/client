@@ -26,7 +26,7 @@ const RootLayout = ({ children }: StrictPropsWithChildren) => {
           <ErrorBoundary>{children}</ErrorBoundary>
           <Footer />
         </Providers>
-        <Toaster />
+        <Toaster position="top-right" />
       </body>
     </html>
   );

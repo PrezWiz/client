@@ -34,15 +34,17 @@ const PPTEditor = ({ slides: initialSlides, id, onPrev }: PPTEditorProps) => {
     <div className="fixed inset-0 z-10 h-screen bg-secondary dark:bg-background">
       <EditorToolbar onPrev={onPrev} />
       <div className="flex h-[calc(100%-3.5rem)] w-full gap-4 p-4">
-        <SlideViewer
-          swiper={swiper}
-          setSwiper={setSwiper}
-          slides={slides}
-          onSlideChange={handleSlideChange}
-          onTransitionEnd={handleTransitionEnd}
-          onTitleChange={handleTitleChange}
-          onContentChange={handleContentChange}
-        />
+        <div className="w-[calc(100%-19rem)] flex-1">
+          <SlideViewer
+            swiper={swiper}
+            setSwiper={setSwiper}
+            slides={slides}
+            onSlideChange={handleSlideChange}
+            onTransitionEnd={handleTransitionEnd}
+            onTitleChange={handleTitleChange}
+            onContentChange={handleContentChange}
+          />
+        </div>
         <SlideListContainer
           slides={slides}
           activeSlide={activeIndex}

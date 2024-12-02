@@ -11,11 +11,12 @@ export type SlideViewerProps = {
   readOnly?: boolean;
   swiper: SwiperType | null;
   setSwiper: (swiper: SwiperType) => void;
+  className?: string;
 };
 
-const SlideViewer = ({ swiper, ...props }: SlideViewerProps) => {
+const SlideViewer = ({ swiper, className, ...props }: SlideViewerProps) => {
   return (
-    <Components.Root>
+    <Components.Root className={className}>
       <Components.Button swiper={swiper} />
       <Components.Content {...props} />
     </Components.Root>

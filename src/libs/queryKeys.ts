@@ -10,7 +10,7 @@ const queryKeys = createQueryKeyStore({
     createOutlines: null,
     create: null,
     update: null,
-    slide: null,
+    slide: (id: number) => [id],
   },
   contact: {
     sendMessage: null,

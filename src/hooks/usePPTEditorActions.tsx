@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
+import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
-import { generatePPT } from '@/libs/pptx';
 import { mutations } from '@/queries';
 import { SlideType } from '@/types/presentation';
 
@@ -19,6 +19,10 @@ const usePPTEditorActions = ({ initialSlides, id, setActiveIndex }: UsePPTEditor
 
   const { mutateAsync } = useMutation({
     ...mutations.presentation.update,
+    onSuccess: () => {
+      toast.success('프레젠테이션이 저장되었어요.');
+      router.push(`/store/${id}`);
+    },
   });
 
   const addSlide = () => {
@@ -49,8 +53,6 @@ const usePPTEditorActions = ({ initialSlides, id, setActiveIndex }: UsePPTEditor
 
   const savePresentation = async () => {
     await mutateAsync({ id, slides });
-    generatePPT(slides);
-    router.push(`/store/${id}`);
   };
 
   return {

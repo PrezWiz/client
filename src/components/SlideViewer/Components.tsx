@@ -4,15 +4,19 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Swiper as SwiperType } from 'swiper/types';
 import { StrictPropsWithChildren } from '@/types/common';
+import { cn } from '@/utils/styles';
 import BasicSlide from './slide/BasicSlide';
 import CoverSlide from './slide/CoverSlide';
 import { SlideViewerProps } from './SlideViewer';
 
-const Root = ({ children }: StrictPropsWithChildren) => (
-  <div className="w-[calc(100%-19rem)] flex-1">
-    <div className="relative h-full w-full overflow-hidden rounded-lg bg-background p-4 shadow-lg dark:border dark:bg-secondary">
-      {children}
-    </div>
+const Root = ({ children, className }: StrictPropsWithChildren<{ className?: string }>) => (
+  <div
+    className={cn(
+      'relative h-full w-full overflow-hidden rounded-lg bg-background p-4 shadow-lg dark:border dark:bg-secondary',
+      className
+    )}
+  >
+    {children}
   </div>
 );
 

@@ -1,14 +1,15 @@
 'use client';
 
 import { useSuspenseQuery } from '@tanstack/react-query';
+import { Download } from 'lucide-react';
 import { useParams } from 'next/navigation';
 import HeadingText from '@/components/common/HeadingText';
 import { SlideViewer } from '@/components/SlideViewer';
+import { Button } from '@/components/ui/button';
 import useSwiper from '@/hooks/useSwiper';
 import { generatePPT } from '@/libs/pptx';
 import { queries } from '@/queries';
 
-// TODO: suspense 처리
 const TopicDetail = () => {
   const { id } = useParams();
   const { activeIndex, handleSlideChange, swiper, setSwiper } = useSwiper();
@@ -17,6 +18,7 @@ const TopicDetail = () => {
     data: { slides },
   } = useSuspenseQuery({
     ...queries.presentation.slide,
+    queryKey: queries.presentation.slide.queryKey(Number(id)),
     queryFn: () => queries.presentation.slide.queryFn(Number(id)),
   });
 
@@ -24,25 +26,32 @@ const TopicDetail = () => {
     generatePPT(slides);
   };
 
-  // TODO: SlideViewer 완성형 컴포넌트로 변경
-
   return (
-    <main className="container flex flex-col items-center py-8">
-      <HeadingText>{slides[0].title}</HeadingText>
-      <SlideViewer readOnly slides={slides} swiper={swiper} setSwiper={setSwiper} onSlideChange={handleSlideChange} />
-      <div className="mt-4 text-sm text-muted-foreground">
-        {activeIndex + 1} / {slides.length}
+    <main className="container mx-auto max-w-6xl px-4 py-12">
+      <HeadingText className="mb-8">{slides[0].title}</HeadingText>
+      <div className="relative rounded-lg border bg-card shadow-sm">
+        <SlideViewer
+          readOnly
+          slides={slides}
+          swiper={swiper}
+          setSwiper={setSwiper}
+          className="aspect-video w-full"
+          onSlideChange={handleSlideChange}
+        />
+        <div className="absolute bottom-8 right-8 z-[1] rounded-full bg-black/50 px-3 py-1 text-sm text-white">
+          {activeIndex + 1} / {slides.length}
+        </div>
       </div>
-      <div className="mt-8 flex gap-4">
-        <button
-          className="rounded bg-blue-500 px-4 py-2 text-white transition hover:bg-blue-600"
-          onClick={handleDownloadPPT}
-        >
-          Download PPT
-        </button>
-        <button className="rounded bg-green-500 px-4 py-2 text-white transition hover:bg-green-600">
-          Download Script
-        </button>
+
+      <div className="mt-8 flex justify-center gap-4">
+        <Button className="gap-2 px-6 py-3" onClick={handleDownloadPPT}>
+          <Download className="h-5 w-5" />
+          <span>PPT 다운로드</span>
+        </Button>
+        <Button variant="outline" className="gap-2 px-6 py-3">
+          <Download className="h-5 w-5" />
+          <span>스크립트 다운로드</span>
+        </Button>
       </div>
     </main>
   );

@@ -7,7 +7,7 @@ export const presentationQueries = {
     queryFn: () => apis.presentation.slides(),
   },
   slide: {
-    queryKey: queryKeys.presentation.slide.queryKey,
+    queryKey: (id: number) => queryKeys.presentation.slide(id).queryKey,
     queryFn: (id: number) => apis.presentation.slide(id),
   },
 } as const;
