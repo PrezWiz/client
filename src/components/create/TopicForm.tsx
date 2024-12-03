@@ -1,8 +1,7 @@
 'use client';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import Loading from '@/components/common/Loading';
-import LoadingComponent from '@/components/common/LoadingComponent';
+import Show from '@/components/common/Show';
 import { mutations } from '@/queries';
 
 type TopicFormProps = {
@@ -30,7 +29,7 @@ const TopicForm = ({ onNext }: TopicFormProps) => {
   };
 
   return (
-    <LoadingComponent isLoading={isPending} fallback={<Loading />}>
+    <Show loading={isPending} when={true}>
       <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
         <label htmlFor="topicInput" className="text-lg font-medium">
           주제를 입력해주세요:
@@ -47,7 +46,7 @@ const TopicForm = ({ onNext }: TopicFormProps) => {
           생성
         </button>
       </form>
-    </LoadingComponent>
+    </Show>
   );
 };
 

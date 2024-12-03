@@ -8,6 +8,14 @@ type EmptyStateProps = {
   className?: string;
 };
 
+/**
+ * 빈 상태를 표시하는 컴포넌트
+ *
+ * @param title - 제목
+ * @param description - 설명
+ * @param children - 자식 요소
+ * @param className - 추가 스타일
+ */
 const EmptyState = ({ title, description, children, className }: PropsWithChildren<EmptyStateProps>) => {
   return (
     <div className={cn('flex min-h-[400px] flex-col items-center justify-center space-y-3', className)}>

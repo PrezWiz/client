@@ -1,4 +1,4 @@
-import LoadingComponent from '@/components/common/LoadingComponent';
+import Show from '@/components/common/Show';
 import { useCreationSlideQueries } from '@/hooks/useCreationSlideQueries';
 import useSlideOutlineActions from '@/hooks/useSlideOutlineActions';
 import Components from './Components';
@@ -30,7 +30,7 @@ const OutlineEditor = ({ onNext }: OutlineEditorProps) => {
   };
 
   return (
-    <LoadingComponent isLoading={isPending} fallback={<Components.CreationLoading />}>
+    <Show loading={isPending} when={outlines.length > 0} loadingComponent={<Components.CreationLoading />}>
       <div className="space-y-8">
         <OutlineList outlines={outlines} onDelete={handleDeleteOutline} onEdit={handleEditOutline} />
         {isAdding && (
@@ -39,7 +39,7 @@ const OutlineEditor = ({ onNext }: OutlineEditorProps) => {
         <Components.AddButton onClick={handleAddOutline} />
         <Components.SubmitButton onClick={handleNext} />
       </div>
-    </LoadingComponent>
+    </Show>
   );
 };
 
