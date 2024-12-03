@@ -2,7 +2,9 @@
 
 import { useSuspenseQuery } from '@tanstack/react-query';
 import HeadingText from '@/components/common/HeadingText';
-import StoreCard from '@/components/store/StoreCard';
+import Show from '@/components/common/Show';
+import NoTopicsState from '@/components/store/NoTopicsState';
+import TopicList from '@/components/store/TopicList';
 import { queries } from '@/queries';
 import { sortByDateDesc } from '@/utils/time';
 
@@ -14,14 +16,13 @@ const TopicGrid = () => {
     select: ({ presentations }) => ({ presentations: sortByDateDesc(presentations) }),
   });
 
+  //TODO: isPending 상태 추가
   return (
     <main className="container flex flex-col items-center py-8">
       <HeadingText subtext="주제를 선택해 주세요">주제 목록</HeadingText>
-      <div className="mt-8 grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {presentations.map(({ id, topic, createdAt }) => (
-          <StoreCard key={id} id={id} topic={topic} createdAt={createdAt} />
-        ))}
-      </div>
+      <Show loading={false} when={presentations.length > 0} fallback={<NoTopicsState />}>
+        <TopicList presentations={presentations} />
+      </Show>
     </main>
   );
 };

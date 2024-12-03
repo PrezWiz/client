@@ -3,13 +3,13 @@ import Link from 'next/link';
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { parseDateISO } from '@/utils/time';
 
-type StoreCardProps = {
+type TopicCardProps = {
   id: number;
   topic: string;
   createdAt: string;
 };
 
-const StoreCard = ({ id, topic, createdAt }: StoreCardProps) => {
+const TopicCard = ({ id, topic, createdAt }: TopicCardProps) => {
   const formattedDate = parseDateISO(createdAt).formatted;
 
   return (
@@ -42,4 +42,4 @@ const StoreCard = ({ id, topic, createdAt }: StoreCardProps) => {
   );
 };
 
-export default StoreCard;
+export default TopicCard;
