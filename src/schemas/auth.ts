@@ -12,7 +12,7 @@ export const registerSchema = z.object({
 });
 
 export const changePasswordSchema = z.object({
-  password: commonSchemas.password,
+  currentPassword: commonSchemas.password,
   newPassword: commonSchemas.password,
 });
 

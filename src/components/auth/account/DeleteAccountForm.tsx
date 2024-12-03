@@ -1,51 +1,18 @@
 'use client';
 
-import { useMutation } from '@tanstack/react-query';
-import { useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/button';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { mutations } from '@/queries';
-import { deleteAccountSchema } from '@/schemas/auth';
-import { useSetIsLoggedInAtom } from '@/stores/auth';
-import type { z } from 'zod';
-
-const defaultValues = {
-  password: '',
-};
+import { Form } from '@/components/ui/form';
+import useDeleteAccount from '@/hooks/useDeleteAccount';
 
 const DeleteAccountForm = () => {
-  const setIsLoggedIn = useSetIsLoggedInAtom();
-
-  const { mutateAsync } = useMutation({
-    ...mutations.auth.login,
-    onSuccess: () => {
-      setIsLoggedIn(true);
-    },
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    onError: (error: any) => {
-      //TODO : 전역 에러 처리
-      toast.error(error?.response?.data?.message);
-    },
-  });
-
-  const form = useForm<z.infer<typeof deleteAccountSchema>>({
-    defaultValues,
-    resolver: zodResolver(deleteAccountSchema),
-  });
-
-  const { control, handleSubmit } = form;
-
-  const onSubmit = async (values: z.infer<typeof deleteAccountSchema>) => {
-    await mutateAsync(values);
-  };
+  const { form, onSubmit } = useDeleteAccount();
+  const { handleSubmit } = form;
 
   return (
     <Form {...form}>
       <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
-        <FormField
+        {/** TODO: 추후 비밀번호 수집 필요 */}
+        {/* <FormField
           control={control}
           name="password"
           render={({ field }) => (
@@ -57,7 +24,7 @@ const DeleteAccountForm = () => {
               <FormMessage />
             </FormItem>
           )}
-        />
+        /> */}
         <Button type="submit" variant="destructive" className="w-full">
           계정 삭제하기
         </Button>

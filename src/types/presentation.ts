@@ -18,7 +18,17 @@ export interface SlideType {
   content: string;
 }
 
+export interface CreateSlidesRequest {
+  id: number;
+  outlines: OutlineType[];
+}
+
 export interface CreateSlidesResponse {
+  slides: SlideType[];
+}
+
+export interface UpdateSlidesRequest {
+  id: number;
   slides: SlideType[];
 }
 
@@ -37,6 +47,11 @@ export interface SlidesResponse {
 }
 
 export interface SlideResponse {
+  slides: SlideType[];
+}
+
+export interface ScriptRequest {
+  id: number;
   slides: SlideType[];
 }
 

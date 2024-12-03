@@ -1,6 +1,6 @@
 import { apis } from '@/apis';
 import { queryKeys } from '@/libs/queryKeys';
-import { OutlineType, SlideType } from '@/types/presentation';
+import { CreateSlidesRequest, ScriptRequest, UpdateSlidesRequest } from '@/types/presentation';
 
 export const presentationMutations = {
   createOutlines: {
@@ -9,15 +9,14 @@ export const presentationMutations = {
   },
   create: {
     mutationKey: queryKeys.presentation.create.queryKey,
-    mutationFn: ({ id, outlines }: { id: number; outlines: OutlineType[] }) =>
-      apis.presentation.create({ id, outlines }),
+    mutationFn: (payload: CreateSlidesRequest) => apis.presentation.create(payload),
   },
   update: {
     mutationKey: queryKeys.presentation.update.queryKey,
-    mutationFn: ({ id, slides }: { id: number; slides: SlideType[] }) => apis.presentation.update({ id, slides }),
+    mutationFn: (payload: UpdateSlidesRequest) => apis.presentation.update(payload),
   },
   script: {
     mutationKey: (id: number) => queryKeys.presentation.script(id).queryKey,
-    mutationFn: ({ id, slides }: { id: number; slides: SlideType[] }) => apis.presentation.script({ id, slides }),
+    mutationFn: (payload: ScriptRequest) => apis.presentation.script(payload),
   },
 } as const;

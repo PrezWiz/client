@@ -2,12 +2,13 @@ import { apiPaths } from '@/constants/apis';
 import { extractAxiosData, privateAxios } from '@/libs/baseAxios';
 import {
   CreateOutlinesResponse,
+  CreateSlidesRequest,
   CreateSlidesResponse,
-  OutlineType,
+  ScriptRequest,
   ScriptResponse,
   SlideResponse,
-  SlideType,
   SlidesResponse,
+  UpdateSlidesRequest,
   UpdateSlidesResponse,
 } from '@/types/presentation';
 
@@ -29,21 +30,21 @@ export const presentationApis = {
 
     return response;
   },
-  create: async ({ id, outlines }: { id: number; outlines: OutlineType[] }) => {
+  create: async ({ id, outlines }: CreateSlidesRequest) => {
     const response = await extractAxiosData<CreateSlidesResponse>(
       privateAxios.post(`${apiPaths.presentation.create}/${id}`, { outlines })
     );
 
     return response;
   },
-  script: async ({ id, slides }: { id: number; slides: SlideType[] }) => {
+  script: async ({ id, slides }: ScriptRequest) => {
     const response = await extractAxiosData<ScriptResponse>(
       privateAxios.post(`${apiPaths.presentation.script}/${id}`, { slides })
     );
 
     return response;
   },
-  update: async ({ id, slides }: { id: number; slides: SlideType[] }) => {
+  update: async ({ id, slides }: UpdateSlidesRequest) => {
     const response = await extractAxiosData<UpdateSlidesResponse>(
       privateAxios.put(`${apiPaths.presentation.update}/${id}`, { slides })
     );

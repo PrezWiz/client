@@ -4,6 +4,8 @@ const queryKeys = createQueryKeyStore({
   auth: {
     login: null,
     register: null,
+    changePassword: null,
+    deleteAccount: null,
   },
   presentation: {
     slides: null,

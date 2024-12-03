@@ -1,16 +1,26 @@
 import { apiPaths } from '@/constants/apis';
-import { baseAxios, extractAxiosData } from '@/libs/baseAxios';
+import { baseAxios, extractAxiosData, privateAxios } from '@/libs/baseAxios';
 import { ApiResponse } from '@/types/apis';
-import { LoginRequest, RegisterRequest } from '@/types/auth';
+import { ChangePasswordRequest, LoginRequest, RegisterRequest } from '@/types/auth';
 
 export const authApis = {
-  login: async ({ email, password }: LoginRequest) => {
-    const response = await extractAxiosData<ApiResponse>(baseAxios.post(apiPaths.auth.login, { email, password }));
+  login: async (payload: LoginRequest) => {
+    const response = await extractAxiosData<ApiResponse>(baseAxios.post(apiPaths.auth.login, payload));
 
     return response;
   },
-  register: async ({ email, password }: RegisterRequest) => {
-    const response = await extractAxiosData<ApiResponse>(baseAxios.post(apiPaths.auth.register, { email, password }));
+  register: async (payload: RegisterRequest) => {
+    const response = await extractAxiosData<ApiResponse>(baseAxios.post(apiPaths.auth.register, payload));
+
+    return response;
+  },
+  changePassword: async (payload: ChangePasswordRequest) => {
+    const response = await extractAxiosData<ApiResponse>(privateAxios.patch(apiPaths.auth.changePassword, payload));
+
+    return response;
+  },
+  deleteAccount: async () => {
+    const response = await extractAxiosData<ApiResponse>(privateAxios.delete(apiPaths.auth.deleteAccount));
 
     return response;
   },

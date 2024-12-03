@@ -1,13 +1,13 @@
-import React from 'react';
 import { ChangePasswordDialog } from '@/components/layout/Navbar/dialogs';
 import DeleteAccountDialog from '@/components/layout/Navbar/dialogs/DeleteAccountDialog';
 import { DropdownMenu, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import useLogoutAction from '@/hooks/useLogoutAction';
 import useMemberMenuActions from '@/hooks/useMemberMenuActions';
 import Components from './Components';
 
 const MemberMenu = () => {
-  const { changePasswordOpen, setChangePasswordOpen, deleteAccountOpen, setDeleteAccountOpen, onLogout } =
-    useMemberMenuActions();
+  const { changePasswordOpen, setChangePasswordOpen, deleteAccountOpen, setDeleteAccountOpen } = useMemberMenuActions();
+  const { onLogout } = useLogoutAction();
 
   return (
     <>
