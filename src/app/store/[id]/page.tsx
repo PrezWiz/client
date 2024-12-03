@@ -1,14 +1,16 @@
 'use client';
 
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useMutation, useSuspenseQuery } from '@tanstack/react-query';
 import { Download } from 'lucide-react';
 import { useParams } from 'next/navigation';
 import HeadingText from '@/components/common/HeadingText';
+import { LoadingButton } from '@/components/common/LoadingButton';
 import { SlideViewer } from '@/components/SlideViewer';
 import { Button } from '@/components/ui/button';
 import useSwiper from '@/hooks/useSwiper';
 import { generatePPT } from '@/libs/pptx';
-import { queries } from '@/queries';
+import { mutations, queries } from '@/queries';
+import { downloadTextFile } from '@/utils/file';
 
 const TopicDetail = () => {
   const { id } = useParams();
@@ -22,8 +24,18 @@ const TopicDetail = () => {
     queryFn: () => queries.presentation.slide.queryFn(Number(id)),
   });
 
+  const { mutateAsync: getScript, isPending: isScriptLoading } = useMutation({
+    ...mutations.presentation.script,
+    mutationKey: mutations.presentation.script.mutationKey(Number(id)),
+  });
+
   const handleDownloadPPT = () => {
     generatePPT(slides);
+  };
+
+  const handleDownloadScript = async () => {
+    const script = await getScript({ id: Number(id), slides });
+    downloadTextFile(script.content, slides[0].title);
   };
 
   return (
@@ -48,10 +60,15 @@ const TopicDetail = () => {
           <Download className="h-5 w-5" />
           <span>PPT 다운로드</span>
         </Button>
-        <Button variant="outline" className="gap-2 px-6 py-3">
-          <Download className="h-5 w-5" />
+        <LoadingButton
+          variant="outline"
+          isLoading={isScriptLoading}
+          loadingText="스크립트 생성중..."
+          icon={<Download className="h-5 w-5" />}
+          onClick={handleDownloadScript}
+        >
           <span>스크립트 다운로드</span>
-        </Button>
+        </LoadingButton>
       </div>
     </main>
   );

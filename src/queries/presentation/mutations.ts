@@ -16,4 +16,8 @@ export const presentationMutations = {
     mutationKey: queryKeys.presentation.update.queryKey,
     mutationFn: ({ id, slides }: { id: number; slides: SlideType[] }) => apis.presentation.update({ id, slides }),
   },
+  script: {
+    mutationKey: (id: number) => queryKeys.presentation.script(id).queryKey,
+    mutationFn: ({ id, slides }: { id: number; slides: SlideType[] }) => apis.presentation.script({ id, slides }),
+  },
 } as const;

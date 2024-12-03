@@ -1,7 +1,9 @@
+/** 날짜(createdAt)를 기준으로 내림차순으로 정렬합니다. */
 export const sortByDateDesc = <T extends { createdAt: string }>(items: T[]) => {
   return items.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 };
 
+/** ISO 형식의 날짜를 파싱합니다. (formatted: YYYY-MM-DD) */
 export const parseDateISO = (isoString: string) => {
   const date = new Date(isoString);
 

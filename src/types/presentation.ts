@@ -39,3 +39,7 @@ export interface SlidesResponse {
 export interface SlideResponse {
   slides: SlideType[];
 }
+
+export interface ScriptResponse {
+  content: string;
+}

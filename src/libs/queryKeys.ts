@@ -11,6 +11,7 @@ const queryKeys = createQueryKeyStore({
     create: null,
     update: null,
     slide: (id: number) => [id],
+    script: (id: number) => [id],
   },
   contact: {
     sendMessage: null,

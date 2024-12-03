@@ -9,6 +9,7 @@ export const apiPaths = {
     slide: '/slides',
     create: '/slides',
     update: '/slides',
+    script: '/script',
   },
   contact: {
     sendMessage: '/contact',

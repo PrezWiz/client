@@ -4,6 +4,7 @@ import {
   CreateOutlinesResponse,
   CreateSlidesResponse,
   OutlineType,
+  ScriptResponse,
   SlideResponse,
   SlideType,
   SlidesResponse,
@@ -31,6 +32,13 @@ export const presentationApis = {
   create: async ({ id, outlines }: { id: number; outlines: OutlineType[] }) => {
     const response = await extractAxiosData<CreateSlidesResponse>(
       privateAxios.post(`${apiPaths.presentation.create}/${id}`, { outlines })
+    );
+
+    return response;
+  },
+  script: async ({ id, slides }: { id: number; slides: SlideType[] }) => {
+    const response = await extractAxiosData<ScriptResponse>(
+      privateAxios.post(`${apiPaths.presentation.script}/${id}`, { slides })
     );
 
     return response;

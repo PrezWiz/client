@@ -31,9 +31,3 @@ export const getContentPreset = (align: pptxgen.AlignV) => ({
   ...PPT_CONTENT_PRESET,
   valign: align,
 });
-
-export const generateFileName = (input: string) => {
-  const invalidChars = /[<>:"/\\|?*()]/g;
-
-  return input.replace(invalidChars, '').replace(/\s+/g, '_');
-};

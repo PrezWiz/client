@@ -1,8 +1,8 @@
 import toast from 'react-hot-toast';
 import pptxgen from 'pptxgenjs';
 import { SlideType } from '@/types/presentation';
+import { generateFileName } from '@/utils/file';
 import {
-  generateFileName,
   getContentPreset,
   getCoverContentPreset,
   getCoverTitlePreset,
