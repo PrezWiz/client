@@ -1,14 +1,7 @@
 import { Calendar, ChevronRight, FileText } from 'lucide-react';
 import Link from 'next/link';
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-
-const formatDate = (isoString: string) => {
-  const date = new Date(isoString);
-  const year = date.getFullYear();
-  const month = (date.getMonth() + 1).toString().padStart(2, '0');
-  const day = date.getDate().toString().padStart(2, '0');
-  return `${year}-${month}-${day}`;
-};
+import { parseDateISO } from '@/utils/time';
 
 type StoreCardProps = {
   id: number;
@@ -17,6 +10,8 @@ type StoreCardProps = {
 };
 
 const StoreCard = ({ id, topic, createdAt }: StoreCardProps) => {
+  const formattedDate = parseDateISO(createdAt).formatted;
+
   return (
     <Link href={`/store/${id}`}>
       <Card className="group relative w-full overflow-hidden rounded-lg border border-border bg-card transition-all duration-200 hover:shadow-lg dark:hover:shadow-zinc-900">
@@ -32,7 +27,7 @@ const StoreCard = ({ id, topic, createdAt }: StoreCardProps) => {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Calendar className="h-4 w-4" />
-                <CardDescription>{formatDate(createdAt)}</CardDescription>
+                <CardDescription>{formattedDate}</CardDescription>
               </div>
 
               <div className="flex items-center gap-1 text-sm font-medium text-muted-foreground">
