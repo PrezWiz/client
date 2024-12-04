@@ -1,5 +1,5 @@
+import TopicCard from '@/components/store/TopicList/TopicCard';
 import { PresentationType } from '@/types/presentation';
-import TopicCard from './TopicCard';
 
 type TopicListProps = {
   presentations: PresentationType[];
