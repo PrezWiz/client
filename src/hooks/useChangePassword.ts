@@ -2,10 +2,10 @@ import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ERROR_MESSAGE } from '@/constants/errorMessage';
 import { mutations } from '@/queries';
 import { changePasswordSchema } from '@/schemas/auth';
 import { ApiErrorResponse } from '@/types/apis';
+import { getFetchErrorCode, getFetchErrorMessage } from '@/utils/\bapis';
 import type { z } from 'zod';
 
 const defaultValues = {
@@ -20,7 +20,8 @@ const useChangePassword = () => {
   });
 
   const handleError = (error: ApiErrorResponse) => {
-    const errorCode = error?.response?.data?.code || 9999;
+    const errorCode = getFetchErrorCode(error);
+    const errorMessage = getFetchErrorMessage(error);
 
     if (errorCode === 2003) {
       form.setError('currentPassword', {
@@ -29,7 +30,7 @@ const useChangePassword = () => {
       return;
     }
 
-    toast.error(ERROR_MESSAGE[errorCode] || ERROR_MESSAGE[9999]);
+    toast.error(errorMessage);
   };
 
   const { mutateAsync } = useMutation({
