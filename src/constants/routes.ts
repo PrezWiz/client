@@ -1,5 +1,5 @@
 export const BASE_URL = '/';
 
-export const PUBLIC_ROUTES = [];
+export const PUBLIC_ROUTES: string[] = [];
 
-export const PRIVATE_ROUTES = ['/create', '/store', '/contact'];
+export const PRIVATE_ROUTES: string[] = ['/create', '/store', '/contact'];
