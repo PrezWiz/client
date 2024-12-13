@@ -15,7 +15,7 @@ export interface ApiErrorResponse extends Error {
   response: {
     data: {
       /** 에러코드 (example: 2003) */
-      code: keyof typeof ERROR_MESSAGE;
+      code: `${keyof typeof ERROR_MESSAGE}`;
       /** 에러메시지 (example: 비밀번호가 일치하지 않아요.) */
       message: string;
       /** 에러경로 (example: /api/member/password) */

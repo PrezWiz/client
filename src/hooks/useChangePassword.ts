@@ -2,6 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { ERROR_MESSAGE } from '@/constants/errorMessage';
 import { mutations } from '@/queries';
 import { changePasswordSchema } from '@/schemas/auth';
 import { ApiErrorResponse } from '@/types/apis';
@@ -23,9 +24,9 @@ const useChangePassword = () => {
     const errorCode = getFetchErrorCode(error);
     const errorMessage = getFetchErrorMessage(error);
 
-    if (errorCode === 2003) {
+    if (errorCode === '2003') {
       form.setError('currentPassword', {
-        message: '비밀번호가 일치하지 않아요.',
+        message: ERROR_MESSAGE[errorCode],
       });
       return;
     }
